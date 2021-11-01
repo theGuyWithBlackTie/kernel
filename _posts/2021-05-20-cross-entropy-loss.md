@@ -16,3 +16,12 @@ One-of-many classification. Each data point can belong to ONE of *C* classes. Th
 **Multi-Label Classification**<br>
 Each data point can belong to more than one class from *C* classes. The deep learning model will have *C* output neurons. Unlike in multi-class classification, here classes are *not* mutually exclusive. The target vector *t* can have more than a positive class, so it will be a vector of 0s and 1s with *C* dimensionality where 0 is *negative* and 1 is *positive* class. One intutive way to understand multi-label classification is to treat multi-label classification as *C* different binary and independent classification problem where each output neuron decides if a sample belongs to a class or not.
 
+#### Output Activation Functions
+These functions are transformations applied to vectors coming out from the deep learning models before the loss computation. The outputs after transformations represents probabilities of belonging to either one or more classes based on multi-class or multi-label setting. 
+
+**Sigmoid**
+It squashes a vector in the range (0,1). It is applied independently to each element of vector *s*.
+
+**Softmax**
+It squashes a vector in the range (0, 1) and all the resulting elements add up to 1. It is applied to the output vector *s*. The Softmax activation cannot be applied independently to each element of vector *s*, since it depends on all elements of *s*. For a given class $$*s_i*$$, the Softmax function can be computed as:
+$$ f(s)_i = \frac{e^(s_i)}{\sum_{j}^C e^(s_j)}$$

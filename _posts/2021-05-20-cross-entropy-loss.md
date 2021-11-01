@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Explaining Cross-Entropy loss and Focal Loss
-categoires: [machinelearning]
+categories: [Machine Learning]
 title: Understanding Cross-Entropy Loss and Focal Loss
 ---
 
@@ -24,12 +24,12 @@ These functions are transformations applied to vectors coming out from the deep 
 It squashes a vector in the range (0,1). It is applied independently to each element of vector *s*.
 ![]({{ site.baseurl }}/images/sigmoid.png "sigmoid activation function")
 
-$$f(s_i) = \frac{1}{1 + e^(-s_(i))}$$
+$$f(s_i) = \frac{1}{1 + e^{-s_{i}}}$$
 
 **Softmax**<br>
 It squashes a vector in the range (0, 1) and all the resulting elements add up to 1. It is applied to the output vector *s*. The Softmax activation cannot be applied independently to each element of vector *s*, since it depends on all elements of *s*. For a given class *s_i*, the Softmax function can be computed as:
 
-$$f(s)_i = \frac{e^(s_i)}{\sum_{j}^C e^s_j)}$$
+$$f(s)_i = \frac{e^{(s_i)}}{\sum_{j}^C e^{s_j}}$$
 
 
 ## Losses
@@ -42,5 +42,9 @@ where $$t_i$$ and $$s_i$$ are the goundtruth and output score for each class *i*
 
 In multi-class setting, target vector *t* is one-hot encoded vector with only one positive class (i.e.$$t_i = 1$$) and rest are negative class (i.e. $$t_i = 0$$). Due to this, we can notice that losses for negative classes are always zero. Hence, it does not make much sense to calculate loss for every class. Whenever our target (ground truth) vector is one-hot vector, we can ignore other labels and utilize only on the hot class for computing cross-entropy loss. So, Cross-Entropy loss becomes:
 
-$$ CE = -log(s_i)$$
+$$ CE = -log(s_i)$$ 
+
+{% include info.html text="The above form of cross-entropy is called as categorical cross-entropy loss. In multi-class classification, this form is often used for simplicity." %}
+
+
 

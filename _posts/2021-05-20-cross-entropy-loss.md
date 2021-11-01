@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Explaining Cross-Entropy loss and Focal Loss
-categoires: [Machine Learning]
+categoires: ["Machine Learning"]
 title: Understanding Cross-Entropy Loss and Focal Loss
 ---
 
@@ -15,3 +15,4 @@ One-of-many classification. Each data point can belong to ONE of *C* classes. Th
 
 **Multi-Label Classification**<br>
 Each data point can belong to more than one class from *C* classes. The deep learning model will have *C* output neurons. Unlike in multi-class classification, here classes are *not* mutually exclusive. The target vector *t* can have more than a positive class, so it will be a vector of 0s and 1s with *C* dimensionality where 0 is *negative* and 1 is *positive* class. One intutive way to understand multi-label classification is to treat multi-label classification as *C* different binary and independent classification problem where each output neuron decides if a sample belongs to a class or not.
+

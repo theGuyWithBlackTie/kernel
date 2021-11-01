@@ -23,9 +23,13 @@ These functions are transformations applied to vectors coming out from the deep 
 **Sigmoid**<br>
 It squashes a vector in the range (0,1). It is applied independently to each element of vector *s*.
 ![]({{ site.baseurl }}/images/sigmoid.png "sigmoid activation function")
-$$f(s_(i)) = \frac{1}{1 + e^(-s_(i))}$$
+
+$$f(s_i) = \frac{1}{1 + e^(-s_(i))}$$
 
 **Softmax**<br>
 It squashes a vector in the range (0, 1) and all the resulting elements add up to 1. It is applied to the output vector *s*. The Softmax activation cannot be applied independently to each element of vector *s*, since it depends on all elements of *s*. For a given class *s_i*, the Softmax function can be computed as:
 
-$$f(s)_i = \frac{e^(s_(i))}{\sum_{j}^C e^(s_(j))}$$
+$$f(s)_i = \frac{e^(s_i)}{\sum_{j}^C e^s_j)}$$
+
+
+## Cross-Entropy Loss

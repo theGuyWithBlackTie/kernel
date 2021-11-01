@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Explaining Cross-Entropy loss and Focal Loss
-categoires: ["Machine Learning"]
+categoires: [machinelearning]
 title: Understanding Cross-Entropy Loss and Focal Loss
 ---
 
@@ -10,6 +10,7 @@ In this blogpost we will understand cross-entropy loss and its various different
 
 Cross-Entropy loss has its different names due to its different variations used in different settings but its core concept (or understanding) remains same across all the different settings. Cross-Entropy Loss is used in a supervised setting and before diving deep into CE, first let's revise widely known and important concepts:
 
+#### Classifications
 **Multi-Class Classification** <br>
 One-of-many classification. Each data point can belong to ONE of *C* classes. The target (ground truth) vector *t* will be a one-hot vector with a positive class and *C*-1 negative classes. All the *C* classes are mutually exclusives and no two classes can be positive class. The deep learning model will have *C* output neurons depicting probability of each of the *C* class to be positive class and it is gathered in a vector *s* (scores). This task is treated as a single classification problem of samples in one of *C* classes.
 
@@ -19,9 +20,12 @@ Each data point can belong to more than one class from *C* classes. The deep lea
 #### Output Activation Functions
 These functions are transformations applied to vectors coming out from the deep learning models before the loss computation. The outputs after transformations represents probabilities of belonging to either one or more classes based on multi-class or multi-label setting. 
 
-**Sigmoid**
+**Sigmoid**<br>
 It squashes a vector in the range (0,1). It is applied independently to each element of vector *s*.
+![]({{ site.baseurl }}/images/sigmoid.png "sigmoid activation function")
+$$f(s_(i)) = \frac{1}{1 + e^(-s_(i))}$$
 
-**Softmax**
-It squashes a vector in the range (0, 1) and all the resulting elements add up to 1. It is applied to the output vector *s*. The Softmax activation cannot be applied independently to each element of vector *s*, since it depends on all elements of *s*. For a given class $$*s_i*$$, the Softmax function can be computed as:
-$$ f(s)_i = \frac{e^(s_i)}{\sum_{j}^C e^(s_j)}$$
+**Softmax**<br>
+It squashes a vector in the range (0, 1) and all the resulting elements add up to 1. It is applied to the output vector *s*. The Softmax activation cannot be applied independently to each element of vector *s*, since it depends on all elements of *s*. For a given class *s_i*, the Softmax function can be computed as:
+
+$$f(s)_i = \frac{e^(s_(i))}{\sum_{j}^C e^(s_(j))}$$

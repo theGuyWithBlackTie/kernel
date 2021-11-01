@@ -105,7 +105,13 @@ window.onload = wrap_img;
     <ul class="section-nav">
 </ul><p>In this blogpost we will understand cross-entropy loss and its various different names. Later in the post, we will learn about Focal Loss, a successor of Cross-Entropy(CE) loss that performs better than CE in highly imbalanced dataset setting. We will also implement Focal Loss in PyTorch.</p>
 
-<p>Cross-Entropy loss has its different names due to its different variations used in different settings but its core concept (or understanding) remains same across all the different settings.</p>
+<p>Cross-Entropy loss has its different names due to its different variations used in different settings but its core concept (or understanding) remains same across all the different settings. Cross-Entropy Loss is used in a supervised setting and before diving deep into CE, first let’s revise widely known and important concepts:</p>
+
+<p><strong>Multi-Class Classification</strong> <br>
+One-of-many classification. Each data point can belong to ONE of <em>C</em> classes. The target (ground truth) vector <em>t</em> will be a one-hot vector with a positive class and <em>C</em>-1 negative classes. All the <em>C</em> classes are mutually exclusives and no two classes can be positive class. The deep learning model will have <em>C</em> output neurons depicting probability of each of the <em>C</em> class to be positive class and it is gathered in a vector <em>s</em> (scores). This task is treated as a single classification problem of samples in one of <em>C</em> classes.</p>
+
+<p><strong>Multi-Label Classification</strong><br>
+Each data point can belong to more than one class from <em>C</em> classes. The deep learning model will have <em>C</em> output neurons. Unlike in multi-class classification, here classes are <em>not</em> mutually exclusive. The target vector <em>t</em> can have more than a positive class, so it will be a vector of 0s and 1s with <em>C</em> dimensionality where 0 is <em>negative</em> and 1 is <em>positive</em> class. One intutive way to understand multi-label classification is to treat multi-label classification as <em>C</em> different binary and independent classification problem where each output neuron decides if a sample belongs to a class or not.</p>
 
   </div><a class="u-url" href="/kernel/2021/05/20/cross-entropy-loss.html" hidden></a>
 </article>

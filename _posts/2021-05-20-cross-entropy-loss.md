@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Explaining Cross-Entropy loss and Focal Loss
-categories: [Machine Learning]
+categoires: [machinelearning]
 title: Understanding Cross-Entropy Loss and Focal Loss
 ---
 
@@ -35,5 +35,12 @@ $$f(s)_i = \frac{e^(s_i)}{\sum_{j}^C e^s_j)}$$
 ## Losses
 ### Cross Entropy Loss
 The cross-entropy loss is defined as:
+
 $$CE = -\sum_i^C t_i log(s_i )$$
+
 where $$t_i$$ and $$s_i$$ are the goundtruth and output score for each class *i* in *C*.
+
+In multi-class setting, target vector *t* is one-hot encoded vector with only one positive class (i.e.$$t_i = 1$$) and rest are negative class (i.e. $$t_i = 0$$). Due to this, we can notice that losses for negative classes are always zero. Hence, it does not make much sense to calculate loss for every class. Whenever our target (ground truth) vector is one-hot vector, we can ignore other labels and utilize only on the hot class for computing cross-entropy loss. So, Cross-Entropy loss becomes:
+
+$$ CE = -log(s_i)$$
+

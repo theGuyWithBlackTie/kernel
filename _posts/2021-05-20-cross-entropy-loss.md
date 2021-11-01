@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Explaining Cross-Entropy loss and Focal Loss
-categoires: [machinelearning]
+categories: [Machine Learning]
 title: Understanding Cross-Entropy Loss and Focal Loss
 ---
 
@@ -32,4 +32,8 @@ It squashes a vector in the range (0, 1) and all the resulting elements add up t
 $$f(s)_i = \frac{e^(s_i)}{\sum_{j}^C e^s_j)}$$
 
 
-## Cross-Entropy Loss
+## Losses
+### Cross Entropy Loss
+The cross-entropy loss is defined as:
+$$CE = -\sum_i^C t_i log(s_i )$$
+where $$t_i$$ and $$s_i$$ are the goundtruth and output score for each class *i* in *C*.

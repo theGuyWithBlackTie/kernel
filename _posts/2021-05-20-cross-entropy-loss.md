@@ -12,22 +12,22 @@ Cross-Entropy loss has its different names due to its different variations used 
 
 #### Classifications
 **Multi-Class Classification** <br>
-One-of-many classification. Each data point can belong to ONE of *C* classes. The target (ground truth) vector *t* will be a one-hot vector with a positive class and *C*-1 negative classes. All the *C* classes are mutually exclusives and no two classes can be positive class. The deep learning model will have *C* output neurons depicting probability of each of the *C* class to be positive class and it is gathered in a vector *s* (scores). This task is treated as a single classification problem of samples in one of *C* classes.
+One-of-many classification. Each data point can belong to ONE of $$C$$ classes. The target (ground truth) vector $$t$$ will be a one-hot vector with a positive class and $$C-1$$ negative classes. All the $$C$$ classes are mutually exclusives and no two classes can be positive class. The deep learning model will have $$C$$ output neurons depicting probability of each of the $$C$$ class to be positive class and it is gathered in a vector $$s$$ (scores). This task is treated as a single classification problem of samples in one of $$C$$ classes.
 
 **Multi-Label Classification**<br>
-Each data point can belong to more than one class from *C* classes. The deep learning model will have *C* output neurons. Unlike in multi-class classification, here classes are *not* mutually exclusive. The target vector *t* can have more than a positive class, so it will be a vector of 0s and 1s with *C* dimensionality where 0 is *negative* and 1 is *positive* class. One intutive way to understand multi-label classification is to treat multi-label classification as *C* different binary and independent classification problem where each output neuron decides if a sample belongs to a class or not.
+Each data point can belong to more than one class from $$C$$ classes. The deep learning model will have $$C$$ output neurons. Unlike in multi-class classification, here classes are *not* mutually exclusive. The target vector $$t$$ can have more than a positive class, so it will be a vector of $$0$$s and $$1$$s with $$C$$ dimensionality where $$0$$ is *negative* and $$1$$ is *positive* class. One intutive way to understand multi-label classification is to treat multi-label classification as $$C$$ different binary and independent classification problem where each output neuron decides if a sample belongs to a class or not.
 
 #### Output Activation Functions
 These functions are transformations applied to vectors coming out from the deep learning models before the loss computation. The outputs after transformations represents probabilities of belonging to either one or more classes based on multi-class or multi-label setting. 
 
 **Sigmoid**<br>
-It squashes a vector in the range (0,1). It is applied independently to each element of vector *s*.
+It squashes a vector in the range $$(0,1)$$. It is applied independently to each element of vector $$s$$.
 ![]({{ site.baseurl }}/images/sigmoid.png "Sigmoid Activation Function")
 
 $$f(s_i) = \frac{1}{1 + e^{-s_{i}}}$$
 
 **Softmax**<br>
-It squashes a vector in the range (0, 1) and all the resulting elements add up to 1. It is applied to the output vector *s*. The Softmax activation cannot be applied independently to each element of vector *s*, since it depends on all elements of *s*. For a given class *s_i*, the Softmax function can be computed as:
+It squashes a vector in the range $$(0, 1)$$ and all the resulting elements add up to $$1$$. It is applied to the output vector $$s$$. The Softmax activation cannot be applied independently to each element of vector *s*, since it depends on all elements of $$s$$. For a given class $$s_i$$, the Softmax function can be computed as:
 
 $$f(s)_i = \frac{e^{(s_i)}}{\sum_{j}^C e^{s_j}}$$
 
@@ -94,4 +94,40 @@ $$
 #### Cross-Entropy in Multi-Label Classification
 As described earlier, in multi-label classification each sample can belong to more than one class. With $$C$$ different classes, multi-label classification is treated as $$C$$ different independent binary classification. Multi-label classification is a binary classification problem w.r.t. every class. The output is vector $$s$$ consisting of $$C$$ number of elements. Binary Cross-Entropy Loss is employed in Multi-Label classification and it is computed for each class in each sample.
 
-$$ Loss per sample = \sum_{i=1}^{i=C}BCE(t_i, f(s)_i) = \sum_{i=1}^{i=C}t_ilog(f(s)_i) $$
+$$ Loss & per & sample = \sum_{i=1}^{i=C}BCE(t_i, f(s)_i) = \sum_{i=1}^{i=C}t_ilog(f(s)_i) $$
+
+### Focal Loss
+Focal Loss was introduced in [Focal Loss for Dense Object Detection](https://arxiv.org/abs/1708.02002) paper by He et al (at FAIR). Object detection is one of the most widely studied topics in Computer Vision with a major challenge of detecting small size objects inside images. Object detection algorithms evaluate about $$10^4$$ to $$10^5$$ candidate locations per image but only a few locations contains objects and rest are just background objects. This leads to class imbalance problem.
+
+Using Binary Cross-Entropy Loss for training with highly class imbalance setting doesn't perform well. BCE needs the model to be confident about what it is predicting that makes the model learn negative class more easily they are heavily available in the dataset. In short, model learns nothing useful. This can be fixed by **Focal Loss**, as it makes easier for the model to predict things without being $$80-100%$$ sure that this object is something. Focal Loss allows the model to take risk while making predictions which is highly important when dealing with highly imbalanced datasets.
+
+{% include info.html text="Though Focal Loss was introduced with object detection example in paper, Focal Loss is meant to be used when dealing with highly imbalanced datasets." %}
+
+#### How Focal Loss Works?
+Focal Loss is am improved version of Cross-Entropy Loss that tries to handle the class imbalance problem by down-weighting easy negative class and focussing training on hard positive classes. In paper, Focal Loss is mathematically defined as:
+
+$$ Focal Loss = -\alpha_t(1 - p_t)^{\gamma}log(p_t) $$
+{% include alert.html text="The above definition is Focal Loss for only one class. It has omitted the $$\sum$$ that would sum over all the classes $$C$$. To calculate total Focal Loss per sample, sum over all the classes." %}
+
+##### What is Alpha and Gamma ?
+The only difference between original Cross-Entropy Loss and Focal Loss are these hyperparameters: alpha($$\alpha$$) and gamma($$\gamma$$). Important point to note is when $$\gamme = 0$$, Focal Loss becomes Cross-Entropy Loss. 
+
+Let's understand the graph below which shows what influences hyperparameters $$\alpha$$ and $$\gamma$$ has on Focal Loss and in turn understand them.
+![]({{ site.baseurl }}/images/focal_loss and CE loss.png)
+In the graph, "blue" line represents **Cross-Entropy Loss**. The X-axis or "probability of ground truth class" (let's call it `pt`) is the probability that the model predicts for the ground truth object. As an example, let's say the model predicts that something is a bike with probability $$0.6$$ and it actually is a bike. In this case, `pt` is $$0.6$$. In the case when object is not a bike, the `pt` is $$0.4 (1-0.6)$$. The Y-axis denotes the loss values at a given $$`p_t`$$. 
+
+As can be seen from the image, when the model predicts the ground truth with a probability of $$0.6$$, the **Cross-Entropy Loss** is somewhere around $$0.5$$. Therefore, to reduce the loss, the model would have to predict the ground truth class with a much higher probability. In other words, **Cross-Entropy Loss** asks the model to be very confident about the ground truth prediction. 
+
+This in turn can actually impact the performance negatively:
+> The deep learning model can actually become overconfident and therefore, the model wouldn't generalize well.
+
+Focal Loss helps here. As can be seen from the graph, Focal Loss with $$\gamma > 1$$ reduces the loss for "well-classified examples" or examples when the model predicts the right thing with probability $$> 0.5$$ whereas, it increases loss for "hard-to-classify examples" when the model predicts with probability $$<0.5$$. Therefore, it turns the model's attention towards the rare class in case of class imbalance.
+
+> $$\gamma$$ controls the shape of curve. The higher the value of $$\gamma$$, the lower the loss for well-classified examples, so we could turn the attention of the model towards 'hard-to-classify' examples. Having higher $$\gamma$$ extends the range in which an example receives low loss.
+
+Another way, apart from Focal Loss, to deal with class imbalance is to introduce weights. Give high weights to the rare class and small weights to the common classes. These weights are referred as $$\alpha$$. 
+
+
+#### Why Focal Loss worked??
+Let's try to understand why Focal Loss worked and BCE did not. The most important part of Focal Loss to understand is below graph:
+

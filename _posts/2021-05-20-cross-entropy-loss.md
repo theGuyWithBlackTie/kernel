@@ -44,7 +44,6 @@ In multi-class setting, target vector *t* is one-hot encoded vector with only on
 
 $$ CE = -log(s_i)$$ 
 
-{% include info.html text="The above form of cross-entropy is called as categorical cross-entropy loss. In multi-class classification, this form is often used for simplicity." %}
-
+{% include info.html text="The above form of cross-entropy is called as **Categorical Cross-Entropy** loss. In multi-class classification, this form is often used for simplicity." %}
 
 

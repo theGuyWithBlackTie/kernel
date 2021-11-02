@@ -60,10 +60,21 @@ $$ CE = -log(s_i)$$
 The *Categorical Cross-Entropy* loss is computed as follows:
 ![]({{ site.baseurl }}/images/softmax_loss.png)
 
-$$ f(s)_i = \frac{e^{s_i}}{\sum_{j}^{C}e^{s_j}} \, CE = -\sum_i^C t_i log(f(s)_i) \, CE = -log(f(s)_i)$$
+$$ f(s)_i = \frac{e^{s_i}}{\sum_{j}^{C}e^{s_j}} \Rightarrow CE = -\sum_i^C t_i log(f(s)_i) \Rightarrow CE = -log(f(s)_i)$$
 
-As, SoftMax activation function is used, many deep learning frameworks and papers often called it as SoftMax Loss.
+As, SoftMax activation function is used, many deep learning frameworks and papers often called it as SoftMax Loss as well.
 
+Based on another classification setting, another variant of Cross-Entropy loss exists called as **Binary Cross-Entropy Loss**(BCE) that is employed during binary classification (*C* = 2). Binary classification is multi-class classification with only 2 classes. To dumb it down further, if one class is a *negative class* automatically the other class becomes *positive class*. In this classification, the output is not a vector *s* but just a single value. Let's understand it further.
+
+The target(ground truth) vector for a random sample contains only one element with value of either 1 or 0. Here, 1 and 0 represents two different classes (*C* = 2). The output score value ranges from 0 to 1. If this value is closer to 1 then class 1 is being predicted and if it is closer to 0, class 0 is being predicted.
+
+```
+BCE = -\sum_{i=1}^{C=2}t_ilog(f(s)_i) = -t_1log(f(s_1)) - (1-t_1)log(1-f(s_1))
+```
+If $$t_1 = 0$$ then $$-t_1log(f(s_1))$$ would become 0 and $$(1-t_1)log(1-f(s_1))$$ would become active. Similarly, if $$t_1 = 1$ then $$-t_1log(f(s_1))$$ would become active and $$(1-t_1)log(1-f(s_1))$$ would become 0.
+
+To get the output score value between [0,1], sigmoid activation function is used and hence it is also called as Sigmoid-Cross Entropy Loss.
+![]({{ site.baseurl }}/images/sigmoid_loss.png)
 
 
 

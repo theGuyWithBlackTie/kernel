@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Explaining Cross-Entropy loss and Focal Loss
-categories: [Machine Learning]
+categories: [Machine Learning, PyTorch]
 title: Understanding Cross-Entropy Loss and Focal Loss
 ---
 
@@ -66,11 +66,11 @@ $$ f(s)_i = \frac{e^{s_i}}{\sum_{j}^{C}e^{s_j}} \Rightarrow CE = -\sum_i^C t_i l
 As, SoftMax activation function is used, many deep learning frameworks and papers often called it as SoftMax Loss as well.
 
 #### Binary Cross-Entropy Loss
-Based on another classification setting, another variant of Cross-Entropy loss exists called as ***Binary Cross-Entropy Loss***(BCE) that is employed during binary classification (*C* = 2). Binary classification is multi-class classification with only 2 classes. To dumb it down further, if one class is a *negative class* automatically the other class becomes *positive class*. In this classification, the output is not a vector *s* but just a single value. Let's understand it further.
+Based on another classification setting, another variant of Cross-Entropy loss exists called as ***Binary Cross-Entropy Loss***(BCE) that is employed during binary classification $$(C = 2)$$. Binary classification is multi-class classification with only 2 classes. To dumb it down further, if one class is a *negative class* automatically the other class becomes *positive class*. In this classification, the output is not a vector *s* but just a single value. Let's understand it further.
 
-The target(ground truth) vector for a random sample contains only one element with value of either 1 or 0. Here, 1 and 0 represents two different classes (*C* = 2). The output score value ranges from 0 to 1. If this value is closer to 1 then class 1 is being predicted and if it is closer to 0, class 0 is being predicted.
+The target(ground truth) vector for a random sample contains only one element with value of either 1 or 0. Here, 1 and 0 represents two different classes $$(C = 2)$$. The output score value ranges from 0 to 1. If this value is closer to 1 then class 1 is being predicted and if it is closer to 0, class 0 is being predicted.
 
-    $$BCE = -\sum_{i=1}^{C=2}t_ilog(f(s)_i) = -t_1log(f(s_1)) - (1-t_1)log(1-f(s_1))$$
+$$BCE = -\sum_{i=1}^{C=2}t_ilog(f(s)_i) = -t_1log(f(s_1)) - (1-t_1)log(1-f(s_1))$$
 
 
 $$s_1$$ and $$t_1$$ are the score and groundtruth label for the class $$C_i$$ in $$C$$. $$s_2 = 1 -s_1$$ and $$t_2 = 1 - t_1$$ are the score and groundtruth label for the class $$C_2$$. If $$t_1 = 0$$ then $$-t_1log(f(s_1))$$ would become $$0$$ and $$(1-t_1)log(1-f(s_1))$$ would become active. Similarly, if $$t_1 = 1$$ then $$-t_1log(f(s_1))$$ would become active and $$(1-t_1)log(1-f(s_1))$$ would become $$0$$. The loss can be expressed as:
@@ -87,14 +87,12 @@ To get the output score value between [0,1], sigmoid activation function is used
 
 ![]({{ site.baseurl }}/images/sigmoid_loss.png)
 
-$$
-f(s_1) =\frac{1}{1+e^{-s_1}} \Rightarrow CE = -t_1log(f(s_1)) - (1-t_1)log(1-f(s_1))
-$$
+$$ f(s_1) =\frac{1}{1+e^{-s_1}} \Rightarrow CE = -t_1log(f(s_1)) - (1-t_1)log(1-f(s_1)) $$
 
 #### Cross-Entropy in Multi-Label Classification
 As described earlier, in multi-label classification each sample can belong to more than one class. With $$C$$ different classes, multi-label classification is treated as $$C$$ different independent binary classification. Multi-label classification is a binary classification problem w.r.t. every class. The output is vector $$s$$ consisting of $$C$$ number of elements. Binary Cross-Entropy Loss is employed in Multi-Label classification and it is computed for each class in each sample.
 
-$$ Loss & per & sample = \sum_{i=1}^{i=C}BCE(t_i, f(s)_i) = \sum_{i=1}^{i=C}t_ilog(f(s)_i) $$
+$$ Loss = \sum_{i=1}^{i=C}BCE(t_i, f(s)_i) = \sum_{i=1}^{i=C}t_ilog(f(s)_i) $$
 
 ### Focal Loss
 Focal Loss was introduced in [Focal Loss for Dense Object Detection](https://arxiv.org/abs/1708.02002) paper by He et al (at FAIR). Object detection is one of the most widely studied topics in Computer Vision with a major challenge of detecting small size objects inside images. Object detection algorithms evaluate about $$10^4$$ to $$10^5$$ candidate locations per image but only a few locations contains objects and rest are just background objects. This leads to class imbalance problem.
@@ -114,7 +112,7 @@ The only difference between original Cross-Entropy Loss and Focal Loss are these
 
 Let's understand the graph below which shows what influences hyperparameters $$\alpha$$ and $$\gamma$$ has on Focal Loss and in turn understand them.
 ![]({{ site.baseurl }}/images/focal_loss and CE loss.png)
-In the graph, "blue" line represents **Cross-Entropy Loss**. The X-axis or "probability of ground truth class" (let's call it `pt`) is the probability that the model predicts for the ground truth object. As an example, let's say the model predicts that something is a bike with probability $$0.6$$ and it actually is a bike. In this case, `pt` is $$0.6$$. In the case when object is not a bike, the `pt` is $$0.4 (1-0.6)$$. The Y-axis denotes the loss values at a given `$$p_t$$`. 
+In the graph, "blue" line represents **Cross-Entropy Loss**. The X-axis or "probability of ground truth class" (let's call it `pt`) is the probability that the model predicts for the ground truth object. As an example, let's say the model predicts that something is a bike with probability $$0.6$$ and it actually is a bike. In this case, `pt` is $$0.6$$. In the case when object is not a bike, the `pt` is $$0.4 (1-0.6)$$. The Y-axis denotes the loss values at a given `pt`. 
 
 As can be seen from the image, when the model predicts the ground truth with a probability of $$0.6$$, the **Cross-Entropy Loss** is somewhere around $$0.5$$. Therefore, to reduce the loss, the model would have to predict the ground truth class with a much higher probability. In other words, **Cross-Entropy Loss** asks the model to be very confident about the ground truth prediction. 
 
@@ -127,7 +125,7 @@ Focal Loss helps here. As can be seen from the graph, Focal Loss with $$\gamma >
 
 Another way, apart from Focal Loss, to deal with class imbalance is to introduce weights. Give high weights to the rare class and small weights to the common classes. These weights are referred as $$\alpha$$.
 
-But Focal Loss paper notably states that adding different weights to different classes to balance the class imbalance is not enough. We also need to reduce the loss of easily-classified examples to avoid them dominating the training. To deal with this, multiplicative factor `$$(1-p_t)^{\gamma}$$` is added to **Cross-Entropy Loss** which gives the **Focal Loss**.
+But Focal Loss paper notably states that adding different weights to different classes to balance the class imbalance is not enough. We also need to reduce the loss of easily-classified examples to avoid them dominating the training. To deal with this, multiplicative factor $$(1-p_t)^{\gamma}$$ is added to **Cross-Entropy Loss** which gives the **Focal Loss**.
 
 #### Focal Loss: Code Implementation
 Here is the implementation of **Focal Loss** in PyTorch:

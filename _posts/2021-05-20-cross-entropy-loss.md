@@ -40,6 +40,17 @@ $$CE = -\sum_i^C t_i log(s_i )$$
 
 where $$t_i$$ and $$s_i$$ are the goundtruth and output score for each class *i* in *C*.
 
+Taking a very rudimentary example, consider the target(groundtruth) vector *t* and output score vector *s* as below:
+```
+Target Vector: [0.6     0.3     0.1]
+Score Vector:  [0.2     0.3     0.5]
+```
+Then *CE* will be computed as follows:
+```
+CE = -(0.6)log(0.2) - 0.3log(0.3) - 0.1log(0.5) = 0.606
+```
+{% include alert.html text="In supervised machine learning settings, elements of target vectors are either 1 or 0. The above example shows how CE is computed and how it is also applicable to find loss between the distributions." %}
+
 In multi-class setting, target vector *t* is one-hot encoded vector with only one positive class (i.e.$$t_i = 1$$) and rest are negative class (i.e. $$t_i = 0$$). Due to this, we can notice that losses for negative classes are always zero. Hence, it does not make much sense to calculate loss for every class. Whenever our target (ground truth) vector is one-hot vector, we can ignore other labels and utilize only on the hot class for computing cross-entropy loss. So, Cross-Entropy loss becomes:
 
 $$ CE = -log(s_i)$$ 
@@ -47,8 +58,13 @@ $$ CE = -log(s_i)$$
 {% include info.html text="The above form of cross-entropy is called as Categorical Cross-Entropy loss. In multi-class classification, this form is often used for simplicity." %}
 
 The *Categorical Cross-Entropy* loss is computed as follows:
-![]({{ site.baseurl }}/images/softmax_loss.png "Categorical Cross-Entropy also known as Softmax Loss Function")
+![]({{ site.baseurl }}/images/softmax_loss.png)
 
-$$ f(s)_i = \frac{e^{s_i}}{\sum_{j}^{C}e^{s_j}}     CE = -\sum_i^C t_i log(f(s)_i) $$
+$$ f(s)_i = \frac{e^{s_i}}{\sum_{j}^{C}e^{s_j}} \, CE = -\sum_i^C t_i log(f(s)_i) \, CE = -log(f(s)_i)$$
+
+As, SoftMax activation function is used, many deep learning frameworks and papers often called it as SoftMax Loss.
+
+
+
 
 

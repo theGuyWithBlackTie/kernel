@@ -110,11 +110,11 @@ $$ Focal Loss = -\alpha_t(1 - p_t)^{\gamma}log(p_t) $$
 {% include alert.html text="The above definition is Focal Loss for only one class. It has omitted the $$\sum$$ that would sum over all the classes $$C$$. To calculate total Focal Loss per sample, sum over all the classes." %}
 
 ##### What is Alpha and Gamma ?
-The only difference between original Cross-Entropy Loss and Focal Loss are these hyperparameters: alpha($$\alpha$$) and gamma($$\gamma$$). Important point to note is when $$\gamme = 0$$, Focal Loss becomes Cross-Entropy Loss. 
+The only difference between original Cross-Entropy Loss and Focal Loss are these hyperparameters: alpha($$\alpha$$) and gamma($$\gamma$$). Important point to note is when $$\gamma = 0$$, Focal Loss becomes Cross-Entropy Loss. 
 
 Let's understand the graph below which shows what influences hyperparameters $$\alpha$$ and $$\gamma$$ has on Focal Loss and in turn understand them.
 ![]({{ site.baseurl }}/images/focal_loss and CE loss.png)
-In the graph, "blue" line represents **Cross-Entropy Loss**. The X-axis or "probability of ground truth class" (let's call it `pt`) is the probability that the model predicts for the ground truth object. As an example, let's say the model predicts that something is a bike with probability $$0.6$$ and it actually is a bike. In this case, `pt` is $$0.6$$. In the case when object is not a bike, the `pt` is $$0.4 (1-0.6)$$. The Y-axis denotes the loss values at a given $$`p_t`$$. 
+In the graph, "blue" line represents **Cross-Entropy Loss**. The X-axis or "probability of ground truth class" (let's call it `pt`) is the probability that the model predicts for the ground truth object. As an example, let's say the model predicts that something is a bike with probability $$0.6$$ and it actually is a bike. In this case, `pt` is $$0.6$$. In the case when object is not a bike, the `pt` is $$0.4 (1-0.6)$$. The Y-axis denotes the loss values at a given `$$p_t$$`. 
 
 As can be seen from the image, when the model predicts the ground truth with a probability of $$0.6$$, the **Cross-Entropy Loss** is somewhere around $$0.5$$. Therefore, to reduce the loss, the model would have to predict the ground truth class with a much higher probability. In other words, **Cross-Entropy Loss** asks the model to be very confident about the ground truth prediction. 
 
@@ -125,9 +125,31 @@ Focal Loss helps here. As can be seen from the graph, Focal Loss with $$\gamma >
 
 > $$\gamma$$ controls the shape of curve. The higher the value of $$\gamma$$, the lower the loss for well-classified examples, so we could turn the attention of the model towards 'hard-to-classify' examples. Having higher $$\gamma$$ extends the range in which an example receives low loss.
 
-Another way, apart from Focal Loss, to deal with class imbalance is to introduce weights. Give high weights to the rare class and small weights to the common classes. These weights are referred as $$\alpha$$. 
+Another way, apart from Focal Loss, to deal with class imbalance is to introduce weights. Give high weights to the rare class and small weights to the common classes. These weights are referred as $$\alpha$$.
 
+But Focal Loss paper notably states that adding different weights to different classes to balance the class imbalance is not enough. We also need to reduce the loss of easily-classified examples to avoid them dominating the training. To deal with this, multiplicative factor `$$(1-p_t)^{\gamma}$$` is added to **Cross-Entropy Loss** which gives the **Focal Loss**.
 
-#### Why Focal Loss worked??
-Let's try to understand why Focal Loss worked and BCE did not. The most important part of Focal Loss to understand is below graph:
+#### Focal Loss: Code Implementation
+Here is the implementation of **Focal Loss** in PyTorch:
 
+```python
+class WeightedFocalLoss(nn.Module):
+    def __init__(self, batch_size, alpha=0.25, gamma=2):
+        super(WeightedFocalLoss, self).__init__()
+
+        self.alpha = alpha.repeat(batch_size, 1)
+        self.gamma = gamma
+
+    def forward(self, inputs, targets):
+        BCE_loss = F.binary_cross_entropy_with_logits(inputs, targets, reduction='none')
+        targets  = targets.type(torch.long)
+        at       = self.alpha
+        pt       = torch.exp(-BCE_loss)
+        F_loss   = at*(1-pt)**self.gamma * BCE_loss
+        return F_loss.mean()
+```
+
+**References**
+1. [Understanding Categorical Cross-Entropy Loss, Binary Cross-Entropy Loss, Softmax Loss, Logistic Loss, Focal Loss and all those confusing names](https://gombru.github.io/2018/05/23/cross_entropy_loss/)
+2. [What is Focal Loss and when should you use it?](https://amaarora.github.io/2020/06/29/FocalLoss.html)
+3. [A Beginner’s Guide to Focal Loss in Object Detection!](https://www.analyticsvidhya.com/blog/2020/08/a-beginners-guide-to-focal-loss-in-object-detection/)

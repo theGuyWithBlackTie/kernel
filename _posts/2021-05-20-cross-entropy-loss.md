@@ -47,9 +47,8 @@ $$ CE = -log(s_i)$$
 {% include info.html text="The above form of cross-entropy is called as Categorical Cross-Entropy loss. In multi-class classification, this form is often used for simplicity." %}
 
 The *Categorical Cross-Entropy* loss is computed as follows:
-![]({{ site.baseurl }}/images/softmax_loss.png "Categorixcal Cross-Entropy also known as Softmax Loss Function")
+![]({{ site.baseurl }}/images/softmax_loss.png "Categorical Cross-Entropy also known as Softmax Loss Function")
 
-
-
+$$ f(s)_i = \frac{e^{s_i}}{\sum_{j}^{C}e^{s_j}}     CE = -\sum_i^C t_i log(f(s)_i) $$
 
 

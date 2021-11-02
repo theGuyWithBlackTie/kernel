@@ -51,26 +51,29 @@ CE = -(0.6)log(0.2) - 0.3log(0.3) - 0.1log(0.5) = 0.606
 ```
 {% include alert.html text="In supervised machine learning settings, elements of target vectors are either 1 or 0. The above example shows how CE is computed and how it is also applicable to find loss between the distributions." %}
 
+#### Categorical Cross-Entropy Loss
 In multi-class setting, target vector *t* is one-hot encoded vector with only one positive class (i.e.$$t_i = 1$$) and rest are negative class (i.e. $$t_i = 0$$). Due to this, we can notice that losses for negative classes are always zero. Hence, it does not make much sense to calculate loss for every class. Whenever our target (ground truth) vector is one-hot vector, we can ignore other labels and utilize only on the hot class for computing cross-entropy loss. So, Cross-Entropy loss becomes:
 
 $$ CE = -log(s_i)$$ 
 
 {% include info.html text="The above form of cross-entropy is called as Categorical Cross-Entropy loss. In multi-class classification, this form is often used for simplicity." %}
 
-The *Categorical Cross-Entropy* loss is computed as follows:
+The ***Categorical Cross-Entropy*** loss is computed as follows:
 ![]({{ site.baseurl }}/images/softmax_loss.png)
 
 $$ f(s)_i = \frac{e^{s_i}}{\sum_{j}^{C}e^{s_j}} \Rightarrow CE = -\sum_i^C t_i log(f(s)_i) \Rightarrow CE = -log(f(s)_i)$$
 
 As, SoftMax activation function is used, many deep learning frameworks and papers often called it as SoftMax Loss as well.
 
-Based on another classification setting, another variant of Cross-Entropy loss exists called as **Binary Cross-Entropy Loss**(BCE) that is employed during binary classification (*C* = 2). Binary classification is multi-class classification with only 2 classes. To dumb it down further, if one class is a *negative class* automatically the other class becomes *positive class*. In this classification, the output is not a vector *s* but just a single value. Let's understand it further.
+#### Binary Cross-Entropy Loss
+Based on another classification setting, another variant of Cross-Entropy loss exists called as ***Binary Cross-Entropy Loss***(BCE) that is employed during binary classification (*C* = 2). Binary classification is multi-class classification with only 2 classes. To dumb it down further, if one class is a *negative class* automatically the other class becomes *positive class*. In this classification, the output is not a vector *s* but just a single value. Let's understand it further.
 
 The target(ground truth) vector for a random sample contains only one element with value of either 1 or 0. Here, 1 and 0 represents two different classes (*C* = 2). The output score value ranges from 0 to 1. If this value is closer to 1 then class 1 is being predicted and if it is closer to 0, class 0 is being predicted.
 
 ```
 $$BCE = -\sum_{i=1}^{C=2}t_ilog(f(s)_i) = -t_1log(f(s_1)) - (1-t_1)log(1-f(s_1))$$
 ```
+
 $$s_1$$ and $$t_1$$ are the score and groundtruth label for the class $$C_i$$ in $$C$$. $$s_2 = 1 -s_1$$ and $$t_2 = 1 - t_1$$ are the score and groundtruth label for the class $$C_2$$. If $$t_1 = 0$$ then $$-t_1log(f(s_1))$$ would become $$0$$ and $$(1-t_1)log(1-f(s_1))$$ would become active. Similarly, if $$t_1 = 1$$ then $$-t_1log(f(s_1))$$ would become active and $$(1-t_1)log(1-f(s_1))$$ would become $$0$$. The loss can be expressed as:
 
 $$CE = 
@@ -80,9 +83,13 @@ $$CE =
     \end{cases}
 $$
 
-To get the output score value between [0,1], sigmoid activation function is used and hence it is also called as Sigmoid-Cross Entropy Loss.
+To get the output score value between [0,1], sigmoid activation function is used and hence it is also called as ***Sigmoid-Cross Entropy Loss***.
+
 ![]({{ site.baseurl }}/images/sigmoid_loss.png)
 
 $$
 f(s_1) =\frac{1}{1+e^{-s_1}} \Rightarrow CE = -t_1log(f(s_1)) - (1-t_1)log(1-f(s_1))
 $$
+
+#### Cross-Entropy in Multi-Label Classification
+

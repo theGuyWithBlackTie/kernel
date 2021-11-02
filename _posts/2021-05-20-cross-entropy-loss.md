@@ -92,3 +92,6 @@ f(s_1) =\frac{1}{1+e^{-s_1}} \Rightarrow CE = -t_1log(f(s_1)) - (1-t_1)log(1-f(s
 $$
 
 #### Cross-Entropy in Multi-Label Classification
+As described earlier, in multi-label classification each sample can belong to more than one class. With $$C$$ different classes, multi-label classification is treated as $$C$$ different independent binary classification. Multi-label classification is a binary classification problem w.r.t. every class. The output is vector $$s$$ consisting of $$C$$ number of elements. Binary Cross-Entropy Loss is employed in Multi-Label classification and it is computed for each class in each sample.
+
+$$ Loss per sample = \sum_{i=1}^{i=C}BCE(t_i, f(s)_i) = \sum_{i=1}^{i=C}t_ilog(f(s)_i) $$

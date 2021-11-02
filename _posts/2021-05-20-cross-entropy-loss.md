@@ -70,9 +70,9 @@ Based on another classification setting, another variant of Cross-Entropy loss e
 
 The target(ground truth) vector for a random sample contains only one element with value of either 1 or 0. Here, 1 and 0 represents two different classes (*C* = 2). The output score value ranges from 0 to 1. If this value is closer to 1 then class 1 is being predicted and if it is closer to 0, class 0 is being predicted.
 
-```
+`
 $$BCE = -\sum_{i=1}^{C=2}t_ilog(f(s)_i) = -t_1log(f(s_1)) - (1-t_1)log(1-f(s_1))$$
-```
+`
 
 $$s_1$$ and $$t_1$$ are the score and groundtruth label for the class $$C_i$$ in $$C$$. $$s_2 = 1 -s_1$$ and $$t_2 = 1 - t_1$$ are the score and groundtruth label for the class $$C_2$$. If $$t_1 = 0$$ then $$-t_1log(f(s_1))$$ would become $$0$$ and $$(1-t_1)log(1-f(s_1))$$ would become active. Similarly, if $$t_1 = 1$$ then $$-t_1log(f(s_1))$$ would become active and $$(1-t_1)log(1-f(s_1))$$ would become $$0$$. The loss can be expressed as:
 
@@ -83,7 +83,8 @@ $$CE =
     \end{cases}
 $$
 
-To get the output score value between [0,1], sigmoid activation function is used and hence it is also called as ***Sigmoid-Cross Entropy Loss***.
+To get the output score value between [0,1], sigmoid activation function is used.
+{% include info.html text="Due to the using of Sigmoid Activation function it is also called as Sigmoid-Cross Entropy Loss." %}
 
 ![]({{ site.baseurl }}/images/sigmoid_loss.png)
 
@@ -92,4 +93,3 @@ f(s_1) =\frac{1}{1+e^{-s_1}} \Rightarrow CE = -t_1log(f(s_1)) - (1-t_1)log(1-f(s
 $$
 
 #### Cross-Entropy in Multi-Label Classification
-

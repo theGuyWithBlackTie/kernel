@@ -75,12 +75,14 @@ $$s_1$$ and $$t_1$$ are the score and groundtruth label for the class $$C_i$$ in
 
 $$CE = 
     \begin{cases}
-    -log(f(s_1)) & if t_1 = 1 \\
-    -log(1-f(s_1)) & if t_1 = 0
+    -log(f(s_1)) & if & t_1 = 1 \\
+    -log(1-f(s_1)) & if & t_1 = 0
     \end{cases}
 $$
 
 To get the output score value between [0,1], sigmoid activation function is used and hence it is also called as Sigmoid-Cross Entropy Loss.
 ![]({{ site.baseurl }}/images/sigmoid_loss.png)
 
-$$f(s_1) =\frac{1}{1+e^{-s_1}} & CE = -t_1log(f(s_1)) - (1-t_1)log(1-f(s_1))$$
+$$
+f(s_1) =\frac{1}{1+e^{-s_1}} \Rightarrow CE = -t_1log(f(s_1)) - (1-t_1)log(1-f(s_1))
+$$

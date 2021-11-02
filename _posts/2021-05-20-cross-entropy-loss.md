@@ -22,7 +22,7 @@ These functions are transformations applied to vectors coming out from the deep 
 
 **Sigmoid**<br>
 It squashes a vector in the range (0,1). It is applied independently to each element of vector *s*.
-![]({{ site.baseurl }}/images/sigmoid.png "sigmoid activation function")
+![]({{ site.baseurl }}/images/sigmoid.png "Sigmoid Activation Function")
 
 $$f(s_i) = \frac{1}{1 + e^{-s_{i}}}$$
 
@@ -44,6 +44,12 @@ In multi-class setting, target vector *t* is one-hot encoded vector with only on
 
 $$ CE = -log(s_i)$$ 
 
-{% include info.html text="The above form of cross-entropy is called as **Categorical Cross-Entropy** loss. In multi-class classification, this form is often used for simplicity." %}
+{% include info.html text="The above form of cross-entropy is called as Categorical Cross-Entropy loss. In multi-class classification, this form is often used for simplicity." %}
+
+The *Categorical Cross-Entropy* loss is computed as follows:
+![]({{ site.baseurl }}/images/softmax_loss.png "Categorixcal Cross-Entropy also known as Softmax Loss Function")
+
+
+
 
 

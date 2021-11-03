@@ -7,11 +7,10 @@
 # https://learnxinyminutes.com/docs/yaml/
 
 title: Multiplying Matrices for a living
-description: "NLP in day, CV by night.
-
-Documenting my learnings of Machine Learning.
-
-Motto: Be Limitless"
+description: |
+  NLP in day, CV by night.
+  Documenting my learnings of Machine Learning.
+  Motto: Be Limitless
 
 github_username: theGuyWithBlackTie
 # you can comment the below line out if your repo name is not different than your baseurl

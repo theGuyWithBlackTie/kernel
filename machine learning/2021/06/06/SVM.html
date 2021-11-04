@@ -4,18 +4,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Multiplying Matrices for a living | NLP in day, CV by night.\ Documenting my learnings of Machine Learning.\ Motto: Be Limitless</title>
+<title>The A-Z Handbook for SVM | Multiplying Matrices for a living</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Multiplying Matrices for a living" />
+<meta property="og:title" content="The A-Z Handbook for SVM" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="NLP in day, CV by night.\ Documenting my learnings of Machine Learning.\ Motto: Be Limitless" />
-<meta property="og:description" content="NLP in day, CV by night.\ Documenting my learnings of Machine Learning.\ Motto: Be Limitless" />
-<link rel="canonical" href="https://theguywithblacktie.github.io/kernel/" />
-<meta property="og:url" content="https://theguywithblacktie.github.io/kernel/" />
+<meta name="description" content="The last blog you need to understand SVM" />
+<meta property="og:description" content="The last blog you need to understand SVM" />
+<link rel="canonical" href="https://theguywithblacktie.github.io/kernel/machine%20learning/2021/06/06/SVM.html" />
+<meta property="og:url" content="https://theguywithblacktie.github.io/kernel/machine%20learning/2021/06/06/SVM.html" />
 <meta property="og:site_name" content="Multiplying Matrices for a living" />
-<meta property="og:image" content="https://theguywithblacktie.github.io/kernel/images/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-06T00:00:00-05:00" />
 <script type="application/ld+json">
-{"url":"https://theguywithblacktie.github.io/kernel/","@type":"WebSite","image":"https://theguywithblacktie.github.io/kernel/images/logo.png","headline":"Multiplying Matrices for a living","name":"Multiplying Matrices for a living","description":"NLP in day, CV by night.\\ Documenting my learnings of Machine Learning.\\ Motto: Be Limitless","@context":"https://schema.org"}</script>
+{"datePublished":"2021-06-06T00:00:00-05:00","url":"https://theguywithblacktie.github.io/kernel/machine%20learning/2021/06/06/SVM.html","@type":"BlogPosting","headline":"The A-Z Handbook for SVM","dateModified":"2021-06-06T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://theguywithblacktie.github.io/kernel/machine%20learning/2021/06/06/SVM.html"},"description":"The last blog you need to understand SVM","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/kernel/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://theguywithblacktie.github.io/kernel/feed.xml" title="Multiplying Matrices for a living" /><link rel="shortcut icon" type="image/x-icon" href="/kernel/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -83,56 +84,46 @@ window.onload = wrap_img;
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home"><h1 id="posts">Posts</h1>
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The A-Z Handbook for SVM</h1><p class="page-description">The last blog you need to understand SVM</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-06-06T00:00:00-05:00" itemprop="datePublished">
+        Jun 6, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
 
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/kernel/categories/#Machine Learning">Machine Learning</a>
+        
+      
+      </p>
+    
 
-  
+    </header>
 
-  <!-- Hide posts if front matter flag hide:true -->
-  
-  
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h3"><a href="#what-is-svm">What is SVM?</a></li>
+</ul><p>In Machine Learning, out of the many available supervised classification algorithms, Support Vector Machine (SVM) is one of the easiest algorithm and yet sometimes it becomes difficult to grasp. In this blog, I try to lay down my notes on unboxing the SVM blackbox and make it easy to understand in detail. This blog focusses on entirety of SVM, from its introduction to classification and kernel tricks.</p>
 
-  <!-- Sort posts by rank, then date -->
-  
-  
-  
+<p>The idea of SVM is simple: The algorithm creates a line or a hyperplane that separates data into different classes. Let’s understand how SVM creates the hyperplane and what are its other jargon.</p>
 
- 
-  
+<h3 id="what-is-svm">
+<a class="anchor" href="#what-is-svm" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is SVM?</h3>
+<p>Support Vector Machine (SVM) is a supervised ML algorithm that can be used for classification and <strong><em>regression as well</em></strong>. However, it is mostly used in classification problems. In the SVM, each data point is plotted in an <strong>n-dimensional</strong> space (<strong>n</strong> = Nos. of features). Then, classification is done by finding the hyperplane that differentiates the classes well.
+<img src="/kernel/images/svm_hyperplance.png" alt="" title="Fig: 1. SVM Example"></p>
 
-   <!-- Assemble final sorted posts array -->
-  
-  <ul class="post-list"><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/kernel/machine%20learning/2021/06/06/SVM.html">
-            The A-Z Handbook for SVM
-          </a>
-        </h3>
-        <p class="post-meta-description">The last blog you need to understand SVM</p>
-          <p class="post-meta">Jun 6, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/kernel/machine%20learning/pytorch/2021/05/20/cross-entropy-loss.html">
-            Understanding Cross-Entropy Loss and Focal Loss
-          </a>
-        </h3>
-        <p class="post-meta-description">Explaining Cross-Entropy loss and Focal Loss</p>
-          <p class="post-meta">May 20, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/kernel/pytorch/2021/05/14/vary-layers-pytorch.html">
-            Adding Variable Number of Layers in Neural Network
-          </a>
-        </h3>
-        <p class="post-meta-description">Code example of showing right way parameterize number of layers to be added in Neural Network</p>
-          <p class="post-meta">May 14, 2021</p>
-      </div>
-  </div></li></ul>
+<p>In the above image, data point is plotted in 2-dimensional space and <strong>solid black</strong> line is the hyperplane that is able to divide the dataset in two classes viz. orange and green color.</p>
 
-    </div>
+  </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
+</article>
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/kernel/"></data>

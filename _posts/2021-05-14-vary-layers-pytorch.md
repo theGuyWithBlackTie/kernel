@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Code example of showing right way parameterize number of layers to be added in Neural Network
-categories: [pytorch]
+categories: [PyTorch]
 title: Adding Variable Number of Layers in Neural Network
 ---
 

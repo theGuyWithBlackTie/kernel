@@ -4,9 +4,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>The A-Z Handbook for SVM | Multiplying Matrices for a living</title>
+<title>Understanding Support Vector Machine | Multiplying Matrices for a living</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="The A-Z Handbook for SVM" />
+<meta property="og:title" content="Understanding Support Vector Machine" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="The last blog you need to understand SVM" />
 <meta property="og:description" content="The last blog you need to understand SVM" />
@@ -16,7 +16,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-06-06T00:00:00-05:00" />
 <script type="application/ld+json">
-{"datePublished":"2021-06-06T00:00:00-05:00","url":"https://theguywithblacktie.github.io/kernel/machine%20learning/2021/06/06/SVM.html","@type":"BlogPosting","headline":"The A-Z Handbook for SVM","dateModified":"2021-06-06T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://theguywithblacktie.github.io/kernel/machine%20learning/2021/06/06/SVM.html"},"description":"The last blog you need to understand SVM","@context":"https://schema.org"}</script>
+{"datePublished":"2021-06-06T00:00:00-05:00","url":"https://theguywithblacktie.github.io/kernel/machine%20learning/2021/06/06/SVM.html","@type":"BlogPosting","headline":"Understanding Support Vector Machine","dateModified":"2021-06-06T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://theguywithblacktie.github.io/kernel/machine%20learning/2021/06/06/SVM.html"},"description":"The last blog you need to understand SVM","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/kernel/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://theguywithblacktie.github.io/kernel/feed.xml" title="Multiplying Matrices for a living" /><link rel="shortcut icon" type="image/x-icon" href="/kernel/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -87,7 +87,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">The A-Z Handbook for SVM</h1><p class="page-description">The last blog you need to understand SVM</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-06-06T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Understanding Support Vector Machine</h1><p class="page-description">The last blog you need to understand SVM</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-06-06T00:00:00-05:00" itemprop="datePublished">
         Jun 6, 2021
       </time>
        • <span class="read-time" title="Estimated read time">
@@ -118,9 +118,14 @@ window.onload = wrap_img;
 <h3 id="what-is-svm">
 <a class="anchor" href="#what-is-svm" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is SVM?</h3>
 <p>Support Vector Machine (SVM) is a supervised ML algorithm that can be used for classification and <strong><em>regression as well</em></strong>. However, it is mostly used in classification problems. In the SVM, each data point is plotted in an <strong>n-dimensional</strong> space (<strong>n</strong> = Nos. of features). Then, classification is done by finding the hyperplane that differentiates the classes well.
-<img src="/kernel/images/svm_hyperplance.png" alt="" title="Fig: 1. SVM Example"></p>
+<img src="/kernel/images/svm_hyperplane.png" alt="" title="Fig: 1. SVM Example"></p>
 
 <p>In the above image, data point is plotted in 2-dimensional space and <strong>solid black</strong> line is the hyperplane that is able to divide the dataset in two classes viz. orange and green color.</p>
+
+<p>Hyperplanes divides the datasets into different number of classes. Hyperplanes are <strong>n-1 -dimensional</strong> planes where <strong>n</strong> is total number of features of the dataset. From the above image, data is 2 dimensional and hyperplane got is a 1 dimensional plane.</p>
+
+<p>Taking it further: in the above example there is a hyperplane drew that differentiates the dataset in two classes well. But, we can always select a different hyperplane with a slightly different orientation. Like below: 
+<img src="/kernel/images/svm_multi_hyperplane.png" alt="" title="Fig: 1. Multiple Hyperplanes"></p>
 
   </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
 </article>

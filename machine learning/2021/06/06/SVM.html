@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      2 min read
+      4 min read
     
 </span></p>
 
@@ -127,10 +127,14 @@ window.onload = wrap_img;
 <p>In SVM classificatio, each data point is plotted in an <strong>n-dimensional</strong> space (<strong>n</strong> = Nos. of features). and classified by finding the best hyperplane that differentiates the classes well.
 <img src="/kernel/images/svm_hyperplane.png" alt="" title="Fig: 1. SVM Example"></p>
 
-<p>In the above image, data points are plotted in a 2-dimensional space and <strong>solid black</strong> line is the hyperplane that is able to divide the dataset in two classes viz. orange and green color. The hyperplane becomes the decision boundary where if datapoints are above the hyperplane( black line) they belong to <span style="color:orange"><em>orange</em></span> class and if datapoints are below the hyperplane they belong to <span style="color:orange"><em>green</em></span> class.</p>
-
+<p>In the above image, data points are plotted in a 2-dimensional space and <strong>solid black</strong> line is the hyperplane that is able to divide the dataset in two classes viz. orange and green color. The hyperplane becomes the decision boundary where if datapoints are above the hyperplane( black line) they belong to <span style="color:orange"><em>orange</em></span> class and if datapoints are below the hyperplane they belong to <span style="color:green"><em>green</em></span> class.</p>
 <div class="Toast Toast--warning googoo">
    <span class="Toast-icon"><svg class="octicon octicon-alert octicon octicon-alert octicon octicon-alert octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path></svg></span>
+   <span class="Toast-content">Classification is not done based on hyperplane decision boundary but based on hyperplane plus support vector decision region which is explained in next section.</span>
+</div>
+
+<div class="Toast">
+   <span class="Toast-icon"><svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
    <span class="Toast-content">Hyperplanes segregates the datasets into two classes only.</span>
 </div>
 <p>Hyperplanes are <strong>n-1 -dimensional</strong> planes where <strong>n</strong> is total number of features of the dataset. From the above image, data is 2 dimensional and hyperplane divding the space is a 1 dimensional plane.</p>
@@ -142,19 +146,23 @@ window.onload = wrap_img;
 
 <h4 id="what-are-support-vectors">
 <a class="anchor" href="#what-are-support-vectors" aria-hidden="true"><span class="octicon octicon-link"></span></a>What are Support Vectors?</h4>
-<p>Support Vectors are the vectors passing through the closest data points to the hyperplanes and are parallel to the hyperplane. The distance between the support vectors and hyperplane is called as <strong>margin</strong>. The thumb rule to identify the right hyperplane among infinitly available hyperplanes is: “<strong><em>Select the hyper-plane which segregates the two classes better such that the margin is maximum between the support vector and hyperplane</em></strong>”.</p>
-
-<p>Taking the previous example again, below hyperplane has the maximum <strong>margin</strong> possible between a hyperplane and its support vector and hence the best hyperplane to segregate the classess.
+<p>Support Vectors are the vectors passing through the closest data points to the hyperplanes and are parallel to the hyperplane. The distance between the support vectors and hyperplane is called as <strong>margin</strong>. The thumb rule to identify the right hyperplane among infinitly available hyperplanes is: “<strong><em>Select the hyper-plane which segregates the two classes better such that the margin is maximum between the support vector and hyperplane</em></strong>”.
 <img src="/kernel/images/svm_sv_margin.png" alt="" title="Fig: 3. Best Hyperplane with its Support Vector"></p>
 
-<div class="Toast Toast--warning googoo">
-   <span class="Toast-icon"><svg class="octicon octicon-alert octicon octicon-alert octicon octicon-alert octicon octicon-alert octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path></svg></span>
+<p>In above image, the middle solid black colored line is the hyperplane that divides the dataset into classes whereas two parallel dashed lines are its <strong>support vectors</strong> and they pass through the closest datapoints to the hyperplane.</p>
+
+<p>The <strong>margin</strong> is maximum ever possible due to these chosen support vectors and hence the hyperplane derived from it is the best hyperplane to classify the datapoints into classes.</p>
+
+<div class="Toast">
+   <span class="Toast-icon"><svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
    <span class="Toast-content">The larger the margin the better it is.</span>
 </div>
 
 <h4 id="intuition-for-large-margins">
 <a class="anchor" href="#intuition-for-large-margins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Intuition for Large Margins</h4>
-<p>Maximizing the margin seems good because data points near the</p>
+<p>Due to the support vectors, the classification is not done based on the hyperplane decision boundary but now even support vectors are also considered in classification. The region between two support vectors which includes hyperplane becomes the decision region. In fig. 3, if datapoints are above the decision region towards right they will be classified into <span style="color:orange"><em>orange</em></span> class and if datapoints are below the decision region towards left they will be classified into <span style="color:green"><em>green</em></span> class.</p>
+
+<p>Maximizing the margin seems good because data points near the decision region represent very uncertain classification decisions. For example, after training SVM we got a certain hyperplane with its support vectors such that the margin is very-very small. In this case SVM does not have confidence on its prediction of datapoints which are very close to the decsision region: there is almost a 50% chance of the classifier deciding either way. Whereas a SVM classifier with a large margin makes no low certainty classification decisions. A large margin gives classifier safety margin where a slight error in measurement or a slight document variation will not cause a misclassification.</p>
 
   </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
 </article>

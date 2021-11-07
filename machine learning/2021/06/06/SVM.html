@@ -114,6 +114,7 @@ window.onload = wrap_img;
 <ul>
 <li class="toc-entry toc-h4"><a href="#what-are-support-vectors">What are Support Vectors?</a></li>
 <li class="toc-entry toc-h4"><a href="#intuition-for-large-margins">Intuition for Large Margins</a></li>
+<li class="toc-entry toc-h4"><a href="#mathematics-for-svm">Mathematics for SVM</a></li>
 </ul>
 </li>
 </ul><p>In Machine Learning, out of the many available supervised classification algorithms, Support Vector Machine (SVM) is one of the easiest algorithm and yet sometimes it becomes difficult to grasp due to its little nuances. In this blog, I try to lay down my notes on unboxing the SVM blackbox and make it easy to understand in detail. This blog focusses on entirety of SVM, from its introduction to classification and kernel tricks.</p>
@@ -169,7 +170,13 @@ window.onload = wrap_img;
 <a class="anchor" href="#intuition-for-large-margins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Intuition for Large Margins</h4>
 <p>In SVM, the classification is not done based on the hyperplane decision boundary but even support vectors are also considered in classification. The region between two support vectors which includes hyperplane becomes the decision region. In fig. 3, if datapoints are above the decision region towards right they will be classified into <span style="color:orange"><em>orange</em></span> class and if datapoints are below the decision region towards left they will be classified into <span style="color:green"><em>green</em></span> class.</p>
 
-<p>Maximizing the margin seems good because data points near the decision region represent very uncertain classification decisions. For example, after training SVM we got a certain hyperplane with its support vectors such that the margin is very-very small. In this case SVM does not have confidence on its prediction of datapoints which are very close to the decsision region: there is almost a 50% chance of the classifier deciding either way. Whereas a SVM classifier with a large margin makes no low certainty classification decisions. A large margin gives classifier safety margin where a slight error in measurement or a slight document variation will not cause a misclassification.</p>
+<p>Maximizing the margin seems good because data points near the decision region represent very uncertain classification decisions. For example, after training SVM we got a certain hyperplane with its support vectors such that the margin is very-very small. In this case SVM does not have confidence on its prediction of datapoints which are very close to the decsision region: there is almost a $50%$ chance of the classifier deciding either way. Whereas a SVM classifier with a large margin makes no low certainty classification decisions. A large margin gives classifier safety margin where a slight error in measurement or a slight document variation will not cause a misclassification.</p>
+
+<h4 id="mathematics-for-svm">
+<a class="anchor" href="#mathematics-for-svm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mathematics for SVM</h4>
+<p>Lets go through the mathematics of SVM and understand SVM manages to select the hyperplane with maximum margin possible.</p>
+
+<p>Generally, the equation of a line is given by:$y=ax+b$.</p>
 
   </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
 </article>

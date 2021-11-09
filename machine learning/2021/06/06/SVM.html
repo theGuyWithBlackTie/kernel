@@ -118,6 +118,7 @@ window.onload = wrap_img;
 <ul>
 <li class="toc-entry toc-h5"><a href="#compute-distance-from-a-point-to-the-hyperplane">Compute distance from a point to the hyperplane</a></li>
 <li class="toc-entry toc-h5"><a href="#compute-the-margin-of-hyperplane">Compute the margin of hyperplane</a></li>
+<li class="toc-entry toc-h5"><a href="#finding-the-optimal-best-hyperplane">Finding the optimal-best hyperplane</a></li>
 </ul>
 </li>
 </ul>
@@ -377,7 +378,7 @@ M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist
 
 <h5 id="compute-the-margin-of-hyperplane">
 <a class="anchor" href="#compute-the-margin-of-hyperplane" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compute the margin of hyperplane</h5>
-<p>Now that we have distance $||p|| between <strong>$A$</strong> and hyperplane, the margin is defined by:</p>
+<p>Now that we have distance $||p||$ between <strong>$A$</strong> and hyperplane, the margin is defined by:</p>
 
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>a</mi><mi>r</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo>=</mo><mn>2</mn><mo>×</mo><mi mathvariant="normal">∥</mi><mi>p</mi><mi mathvariant="normal">∥</mi><mo>=</mo><mn>4</mn><msqrt><mn>5</mn></msqrt></mrow><annotation encoding="application/x-tex">margin = 2 \times \|p\| = 4\sqrt{5}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∥</span><span class="mord mathdefault">p</span><span class="mord">∥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.08390500000000001em;"></span><span class="mord">4</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.956095em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">5</span></span></span><span style="top:-2.916095em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width="400em" height="1.08em" viewbox="0 0 400000 1080" preserveaspectratio="xMinYMin slice"><path d="M95,702
 c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
@@ -391,6 +392,11 @@ H400000v40H845.2724
 s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
 c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
 M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.08390500000000001em;"><span></span></span></span></span></span></span></span></span></span>
+
+<h5 id="finding-the-optimal-best-hyperplane">
+<a class="anchor" href="#finding-the-optimal-best-hyperplane" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finding the optimal-best hyperplane</h5>
+<p>In above section, we first considered a hyperplane that divided the dataset into two classes. We took closest point to this hyperplane i.e.point <strong>$A$</strong>,  as one of the support vector will pass through it and calculated its ($||p||$) distance from the hyperplane. With $margin = 2 \times ||p|\p$ we would get two support vectors and hyperplane as shown below:
+<img src="/kernel/images/svm_maths_3.png" alt="" title="Fig: 4. Hyperplane and Support Vectors"></p>
 
   </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
 </article>

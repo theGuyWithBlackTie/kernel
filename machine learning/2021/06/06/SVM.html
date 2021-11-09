@@ -399,9 +399,22 @@ M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist
 
 <p><img src="/kernel/images/svm_maths_3.png" alt="" title="Fig: 4. Hyperplane and Support Vectors"></p>
 
-<p>As we have seen earlier, the best hyperplane is the one with the maximum margin. In Fig. 4, the margin $M_1$ between two <span style="color:red"><em>red</em></span> support vectors is not the biggest margin possible. The biggest margin is margin $M_2$ with different hyperplane as shown in Fig. 5:</p>
+<p>As we have seen earlier, the best hyperplane is the one with the maximum margin. In Fig. 4, the margin $M_1$ between two <span style="color:red"><em>red</em></span> support vectors is not the biggest margin possible. The biggest margin is margin $M_2$ with a different hyperplane which is the optimal one is shown in Fig. 5:</p>
 
-<p><img src="/kernel/images/svm_maths_3.png" alt="" title="Fig: 4. Optimal Hyperplane and Support Vectors"></p>
+<p><img src="/kernel/images/svm_maths_4.png" alt="" title="Fig: 5. Optimal Hyperplane and Support Vectors"></p>
+
+<p>Optimal hyperplane is slightly left of the initial hyperplane that we considered. It is found by simply tracing a line crossing $M_2$ in its middle. We can say that margins and hyperplanes are closely related and one can be found from another:</p>
+
+<blockquote>
+  <p>If we have hyperplane we can compute its margin with respect to some data point. If we have margin delimited by two support vectors, we can find the hyperplane passing right in the middle of the margin.</p>
+</blockquote>
+
+<div class="Toast">
+   <span class="Toast-icon"><svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
+   <span class="Toast-content">Technically, support vectors are also hyperplanes.</span>
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">Finding the biggest margin is same as finding the best optimal hyperplane</code></p>
 
   </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
 </article>

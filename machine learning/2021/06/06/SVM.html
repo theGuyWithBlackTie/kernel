@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      8 min read
+      10 min read
     
 </span></p>
 
@@ -119,6 +119,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h5"><a href="#compute-distance-from-a-point-to-the-hyperplane">Compute distance from a point to the hyperplane</a></li>
 <li class="toc-entry toc-h5"><a href="#compute-the-margin-of-hyperplane">Compute the margin of hyperplane</a></li>
 <li class="toc-entry toc-h5"><a href="#finding-the-optimal-best-hyperplane">Finding the optimal-best hyperplane</a></li>
+<li class="toc-entry toc-h5"><a href="#finding-biggest-margin">Finding biggest margin</a></li>
 </ul>
 </li>
 </ul>
@@ -415,6 +416,36 @@ M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist
 </div>
 
 <p><code class="language-plaintext highlighter-rouge">Finding the biggest margin is same as finding the best optimal hyperplane</code></p>
+
+<h5 id="finding-biggest-margin">
+<a class="anchor" href="#finding-biggest-margin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finding biggest margin</h5>
+<p>The biggest margin can be found in following steps:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Take a dataset.
+2. Select two hyperplanes(referring to support vectors here) which separate the data with no points between them
+3. Maximize the distance (margin)
+</code></pre></div></div>
+
+<p><strong>Step 1: Defining the dataset</strong>
+Usually, the dataset consists of <strong>$n$</strong> datapoints of <strong>$X_i$</strong>. Each <strong>$X_i$</strong> is associated with a value $y_i$ inidicating the element belongs to the class($+1$) or not($-1$).</p>
+<div class="Toast">
+   <span class="Toast-icon"><svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
+   <span class="Toast-content">In SVM, classes are represented by +1 and -1 rather than 1 and 0.</span>
+</div>
+<p>.</p>
+
+<p>Moreover, each vector <strong>$X_i$</strong> consists of lot of dimensions. Lets say that <strong>$X_i$</strong> is a <strong>$p$</strong>-dimensional vector. So dataset $D$ is the set of $n$ couples of element $(X_i, y_i)$. The more formal definition of dataset is:</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>y</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mi mathvariant="normal">∥</mi><msub><mi>X</mi><mi>i</mi></msub><mstyle mathcolor="#cc0000"><mtext>\belongs</mtext></mstyle><msup><mi>R</mi><mi>p</mi></msup><mo separator="true">,</mo><msub><mi>y</mi><mi>i</mi></msub><mstyle mathcolor="#cc0000"><mtext>\belongs</mtext></mstyle><mrow><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn></mrow></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup></mrow><annotation encoding="application/x-tex">D = {(X_i, y_i) \| X_i \belongs R^p, y_i \belongs {-1, 1}}_{i=1}^{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1039919999999999em;vertical-align:-0.29969999999999997em;"></span><span class="mord"><span class="mord"><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">∥</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord text" style="color:#cc0000;"><span class="mord" style="color:#cc0000;">\belongs</span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714392em;"><span style="top:-3.1130000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord text" style="color:#cc0000;"><span class="mord" style="color:#cc0000;">\belongs</span></span><span class="mord"><span class="mord">−</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.4003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29969999999999997em;"><span></span></span></span></span></span></span></span></span></span></span>
+
+<p><strong>Step 2: Selecting two hyperplanes with no data points between them</strong>
+We need to find two hyperplanes with the help of datapoints such that there are no datapoints between these two hyperplanes. These two hyperplanes are actually the <em>support vectors</em> and with the help of these we will derive the optimal hyperplane.</p>
+
+<p>In the previous examples above, the datapoints were linearly separable and the hyperplane could be easily identified with the eye itself by visualisation. With dataset being non-linearly separable (like shown below) it becomes difficult to identify the hyperplane that divides the dataset. Moreover, whenever data is of $p$-dimension it becomes ever more difficult.</p>
+
+<p><img src="/kernel/images/svm_non_linear.png" alt="" title="Fig: 5. Non Linear Datapoints"></p>
+
+<p>So let’s assume dataset $D$ is linearly separable and would want to find two hyperplanes with no points between them without visualisation.</p>
 
   </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
 </article>

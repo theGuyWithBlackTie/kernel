@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      7 min read
+      8 min read
     
 </span></p>
 
@@ -395,8 +395,13 @@ M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist
 
 <h5 id="finding-the-optimal-best-hyperplane">
 <a class="anchor" href="#finding-the-optimal-best-hyperplane" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finding the optimal-best hyperplane</h5>
-<p>In above section, we first considered a hyperplane that divided the dataset into two classes. We took closest point to this hyperplane i.e.point <strong>$A$</strong>,  as one of the support vector will pass through it and calculated its ($||p||$) distance from the hyperplane. With $margin = 2 \times ||p|\p$ we would get two support vectors and hyperplane as shown below:
-<img src="/kernel/images/svm_maths_3.png" alt="" title="Fig: 4. Hyperplane and Support Vectors"></p>
+<p>In above section, we first considered a hyperplane that divided the dataset into two classes. We took closest point to this hyperplane i.e.point <strong>$A$</strong>,  as one of the support vector will pass through it and calculated its ($||p||$) distance from the hyperplane. With $margin = 2 \times ||p|$ we would get two support vectors and hyperplane as shown below:</p>
+
+<p><img src="/kernel/images/svm_maths_3.png" alt="" title="Fig: 4. Hyperplane and Support Vectors"></p>
+
+<p>As we have seen earlier, the best hyperplane is the one with the maximum margin. In Fig. 4, the margin $M_1$ between two <span style="color:red"><em>red</em></span> support vectors is not the biggest margin possible. The biggest margin is margin $M_2$ with different hyperplane as shown in Fig. 5:</p>
+
+<p><img src="/kernel/images/svm_maths_3.png" alt="" title="Fig: 4. Optimal Hyperplane and Support Vectors"></p>
 
   </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
 </article>

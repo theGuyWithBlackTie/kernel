@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      14 min read
+      15 min read
     
 </span></p>
 
@@ -558,13 +558,38 @@ W.X_i + b \leq -1</annotation></semantics></math></span><span class="katex-html"
 
 <p>To find $m$, we would find a vector such that:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. has magnitude of $m$
-2. it is perpendicular to hyperplane $H_1$
-</code></pre></div></div>
+<ol>
+  <li><span style="background-color:#323443">has magnitude of $m$</span></li>
+  <li>it is perpendicular to hyperplane $H_1$</li>
+</ol>
 
 <p>Fortunately, we already know a vector perpendicular to $H_1$, i.e. vector $W$ (because $H_1 = W.X + b = 1$)</p>
 
 <p><img src="/kernel/images/svm_maxim_2.png" alt="" title="Fig: 10. W is perpendicular to H1"></p>
+
+<p>Lets define $u = \frac{W}{||W||}$ as the unit vector of $W$. As its a unit vector, $||u|| = 1$ and it has the same direction as $W$, so it is also perpendicular to $H_1$.</p>
+
+<p><img src="/kernel/images/svm_maxim_3.png" alt="" title="Fig: 10. u is also perpendicular to H1"></p>
+
+<div class="Toast">
+   <span class="Toast-icon"><svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
+   <span class="Toast-content">We can't add scalar to vector but we can multiply scalar to a vector</span>
+</div>
+
+<p>If we multiply $u$ by scalar $m$ we get the vector $k = m u $ and</p>
+
+<p><span style="background-color:#323443"></span></p>
+<ol>
+  <li>$||k|| = m</li>
+  <li>$k$ is perpendicular to $H_1$ (because it has the same direction as $u$)
+&lt;/span&gt;</li>
+</ol>
+
+<p>From these properties we can see that $k$ is the vector we are looking for:</p>
+
+<p><img src="/kernel/images/svm_maxim_4.png" alt="" title="Fig: 11. k is a vector of length m perpendicular to H1"></p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mi>m</mi><mi>u</mi><mo>=</mo><mi>m</mi><mfrac><mi>W</mi><mrow><mi mathvariant="normal">∥</mi><mi>W</mi><mstyle mathcolor="#cc0000"><mtext>\W</mtext></mstyle></mrow></mfrac></mrow><annotation encoding="application/x-tex">k = mu = m \frac{W}{\|W\W}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">u</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.29633em;vertical-align:-0.936em;"></span><span class="mord mathdefault">m</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∥</span><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="mord text" style="color:#cc0000;"><span class="mord" style="color:#cc0000;">\W</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
 
   </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
 </article>

@@ -637,7 +637,7 @@ To make the problem easier when taking the gradients, we will try to minimize th
 
 <h4 id="linear-inseparability">
 <a class="anchor" href="#linear-inseparability" aria-hidden="true"><span class="octicon octicon-link"></span></a>Linear Inseparability</h4>
-<p>All the examples we have seen until so far were linear separable i.e., the data points could be classified with a straight line. In real world, dataset is not easy to classify with just a straight line and are often linear inseparable. Look at one of the examples of linear inseparable data below:</p>
+<p>All the examples we have seen until so far were linear separable i.e., the data points could be classified with a straight line (or hyperplane). In real world, dataset is not easy to classify with just a hyperplane and are often linear inseparable. Look at one of the examples of linear inseparable data below:</p>
 
 <p><img src="/kernel/images/svm_linear_inseparable.png" alt="" title="Fig: 13. Linear Inseparable Data"></p>
 
@@ -645,6 +645,9 @@ To make the problem easier when taking the gradients, we will try to minimize th
 
 <h5 id="soft-margin">
 <a class="anchor" href="#soft-margin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Soft Margin</h5>
+<p>In real life, data is messy and cannot be segregated perfectly with a hyperplane. Due to this, the constraint of maximizing the margin of the line that separates the classes must be relaxed. For example, consider the following diagram:</p>
+
+<p><img src="/kernel/images/svm_linear_inseparable_2_hyperplanes.png" alt="" title="Fig: 14. Which decision hyperplane boundary is better?"></p>
 
   </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
 </article>

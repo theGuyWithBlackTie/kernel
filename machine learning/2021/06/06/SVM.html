@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      17 min read
+      18 min read
     
 </span></p>
 
@@ -130,7 +130,7 @@ window.onload = wrap_img;
 </li>
 <li class="toc-entry toc-h4"><a href="#linear-inseparability">Linear Inseparability</a>
 <ul>
-<li class="toc-entry toc-h5"><a href="#soft-margin">Soft Margin</a></li>
+<li class="toc-entry toc-h5"><a href="#soft-margin-formulation">Soft Margin Formulation</a></li>
 </ul>
 </li>
 </ul>
@@ -643,11 +643,17 @@ To make the problem easier when taking the gradients, we will try to minimize th
 
 <p>From the Fig. 13, it is evident that there is no linear decision boundary exists that can perfectly segregate the data i.e. the data is linearly inseparable. We have similar situations in higher-dimensional representations as well. These could be solved easily with either <strong>soft-margin formulation</strong> or <strong>kernel trick</strong>.</p>
 
-<h5 id="soft-margin">
-<a class="anchor" href="#soft-margin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Soft Margin</h5>
+<h5 id="soft-margin-formulation">
+<a class="anchor" href="#soft-margin-formulation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Soft Margin Formulation</h5>
 <p>In real life, data is messy and cannot be segregated perfectly with a hyperplane. Due to this, the constraint of maximizing the margin of the line that separates the classes must be relaxed. For example, consider the following diagram:</p>
 
 <p><img src="/kernel/images/svm_linear_inseparable_2_hyperplanes.png" alt="" title="Fig: 14. Which decision hyperplane boundary is better?"></p>
+
+<p>In above image, <em>hyperplane 1</em> perfectly segregates all the training datapoints and respects the constraints of the support vectors i.e. no data point between the support vectors hyperplanes. Due to this constraint, we have a small margin. But, is it really a good idea of having a decision boundary that perfectly separates datapoints with such less margin? The answer is <strong>NO</strong>. If we consider <em>hyperplane 2</em> in above image, it gives a bigger margin but have a misclassification of yellow traingle. So which hyperplane is better? <em>Hyperplane 2</em> is a better decision boundary as it has a wider margin and thus is able to generalize well on the unseen data. <em>Hyperplane 2</em> though misclassifying one of the datapoints but this error is acceptable in the broad sense of generalizing the data well.</p>
+
+<p><code class="language-plaintext highlighter-rouge">The concept of margins where support vectors doesn't allow any data points to lie between them is called hard-margin.</code> Hard-margins in SVM are prone to be influenced even by the single outlier (like in image above) which makes the classifier overly sensitive to the noise in data and overfits the data.</p>
+
+<p>Soft-margins in SVM allows the misclassification to a certain extent(hyperplane 2 in above image) while training and deciding decision boundary hyperplane and generalizes well on the data.</p>
 
   </div><a class="u-url" href="/kernel/machine%20learning/2021/06/06/SVM.html" hidden></a>
 </article>

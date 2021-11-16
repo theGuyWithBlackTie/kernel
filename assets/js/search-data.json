@@ -3,7 +3,7 @@
     
         "post0": {
             "title": "Generative Adversarial Networks",
-            "content": "",
+            "content": "We have come across various articles and posts about AI being capable of producing human like speech or generating images of non-existing people that are difficult to distinguish from real-life existence. These AI systems are built upon generative adversarial networks (GANs) - which Facebook AI research director Yann LeCun called “most interesting idea in last 10 years in ML” .",
             "url": "https://theguywithblacktie.github.io/kernel/2021/06/30/GAN.html",
             "relUrl": "/2021/06/30/GAN.html",
             "date": " • Jun 30, 2021"

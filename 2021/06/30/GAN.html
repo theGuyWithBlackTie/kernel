@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      5 min read
     
 </span></p>
 
@@ -107,6 +107,7 @@ window.onload = wrap_img;
 <ul>
 <li class="toc-entry toc-h3"><a href="#discriminative-models">Discriminative Models</a></li>
 <li class="toc-entry toc-h3"><a href="#generative-models">Generative Models</a></li>
+<li class="toc-entry toc-h3"><a href="#generative-models-are-hard">Generative Models are hard</a></li>
 </ul>
 </li>
 </ul><p>We have come across various articles and posts about AI being capable of producing human like speech or generating images of non-existing people that are difficult to distinguish from real-life existence. These AI systems are built upon generative adversarial networks (GANs) - which Facebook AI research director Yann LeCun called “<em>most interesting idea in last 10 years in ML</em>” GANs were introduced in a <a href="!https://arxiv.org/abs/1406.2661">paper</a> by Ian Goodfellow and other researchers at the University of Montreal, including Yoshua Bengio, in 2014.</p>
@@ -139,14 +140,7 @@ P(Y) = \int_{x}P(Y, X = x)</annotation></semantics></math></span><span class="ka
 
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>Y</mi><mi mathvariant="normal">∣</mi><mi>X</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo separator="true">,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">P(Y|X) = \frac{P(X,Y)}{P(X)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
 
-<table>
-  <tbody>
-    <tr>
-      <td>Thats how, we can compute $P(Y</td>
-      <td>X)$ in generative models.</td>
-    </tr>
-  </tbody>
-</table>
+<p>Thats how, we can compute $P(Y|X)$ in generative models.</p>
 
 <p><span class="highlight"><em>One way think about generative models from GANs perspective is that they do the opposite of discriminative models.</em></span> Instead of predicting labels given the features, generative models attempt to predict features given a certain label i.e. $P(X|Y)$. Understanding it from the email example, generative model tries to answer this: Assuming the given eamil is <code class="language-plaintext highlighter-rouge">spam</code>, how likely are these features? While discriminative models care about relation between $Y$ and $X$, generative models care about <span class="highlight">“how you get $X$?”</span></p>
 
@@ -157,9 +151,28 @@ P(Y) = \int_{x}P(Y, X = x)</annotation></semantics></math></span><span class="ka
   <li>A <strong>generative</strong> model tries to learn joint probability of the input data and labels simultaneously, i.e. <code class="language-plaintext highlighter-rouge">P(X,Y)</code>. This is converted to <code class="language-plaintext highlighter-rouge">P(X|Y)</code> for classification via Bayes rule, but the generative ability could be used for something else as well, such as creating new <code class="language-plaintext highlighter-rouge">(X,Y)</code> sample.</li>
 </ul>
 
+<p>Both these models are used in supervised learning where one wants to learn a rule that maps input $X$ to output $Y$. Some argues that the discriminative models are better as they directly models the quantity we care about i.e. $Y$ and hence no efforts are spent on modelling the input $X$. However, generative models has its own advantages such as capability of dealing with missing data. Since, generative models concerns about $P(X,Y)$ and $P(X)$ at the same time in order to predict $P(Y|X)$, they have less <strong>degree of freedom</strong> as compared to discriminative models. So generative models are more robust, less prone to overfitting than discriminative models.</p>
+
+<h3 id="generative-models-are-hard">
+<a class="anchor" href="#generative-models-are-hard" aria-hidden="true"><span class="octicon octicon-link"></span></a>Generative Models are hard</h3>
+<p>As explained earlier, generative models are better than discriminative models in certain aspects but they are even difficult to train. Generative models tackle a more difficult task than analogous discriminative models. Generative models have to model more.</p>
+
+<p>A generative model for images might capture correlations like “things that look like boats are probably going to appear near things that look like water” and “eyes are unlikely to appear on foreheads”. These are very complicated distributions.</p>
+
+<p>In contrast, a discriminative model might learn the difference between “sailboat” or “not sailboat” by just looking for a few tell-tale patterns. It could ignore many of the correlations that the generative models <strong><em>must</em></strong> get right.</p>
+
+<p>Discriminative models try to draw boundaries in the data space, while generative models try to model how data is placed throughut the space. For example, the following diagrams shows discriminative and generative models of handwritten digits:</p>
+
+<p><img src="/kernel/images/GAN_1.png" alt="" title="Fig: 1. Discriminative and Generative Model of handwritten digits"></p>
+
+<p>The discriminative model tries to tell the difference between handwritten 0’s and 1’s by drawing a line in the data space. If it gets the line right, it can distinguish 0’s from 1’s without ever having to model exactly where the instances are placed in the data space on either side of the line.</p>
+
+<p>In contrast, the generative model tries to produce convincing 1’s and 0’s by generating digits that fall close to their real counterparts in the data space. It has to model the distribution throughout the data space. GANs offer an effective way to train such rich models to resemble a real distribution.</p>
+
 <p><strong>Refereces</strong></p>
 <ol>
   <li><a href="!https://wiki.pathmind.com/generative-adversarial-network-gan">A Beginner’s Guide to Generatvive Adversarial Networks (GANs)</a></li>
+  <li><a href="!https://stats.stackexchange.com/questions/4689/generative-vs-discriminative-models-in-bayesian-context">Stackoverflow</a></li>
 </ol>
 
 

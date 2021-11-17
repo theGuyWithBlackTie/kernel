@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      5 min read
+      7 min read
     
 </span></p>
 
@@ -110,6 +110,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#generative-models-are-hard">Generative Models are hard</a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h2"><a href="#generative-adversarial-networks">Generative Adversarial Networks</a></li>
 </ul><p>We have come across various articles and posts about AI being capable of producing human like speech or generating images of non-existing people that are difficult to distinguish from real-life existence. These AI systems are built upon generative adversarial networks (GANs) - which Facebook AI research director Yann LeCun called “<em>most interesting idea in last 10 years in ML</em>” GANs were introduced in a <a href="!https://arxiv.org/abs/1406.2661">paper</a> by Ian Goodfellow and other researchers at the University of Montreal, including Yoshua Bengio, in 2014.</p>
 
 <p>GANs’ potential for both good and evil is huge, because they can learn to mimic any distribution of data. That is, GANs can be taught to create worlds eerily similar to our own in any domain: images, music, speech, prose. They are robot artists in a sense, and their output is impressive - poignant even. But they can also be used to generate fake media content and are the technology underpinning Deepfakes.</p>
@@ -151,9 +152,11 @@ P(Y) = \int_{x}P(Y, X = x)</annotation></semantics></math></span><span class="ka
   <li>A <strong>generative</strong> model tries to learn joint probability of the input data and labels simultaneously, i.e. <code class="language-plaintext highlighter-rouge">P(X,Y)</code>. This is converted to <code class="language-plaintext highlighter-rouge">P(X|Y)</code> for classification via Bayes rule, but the generative ability could be used for something else as well, such as creating new <code class="language-plaintext highlighter-rouge">(X,Y)</code> sample.</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The word "generative" in generative models does not mean that the model generates actual new data additionally to the dataset. It refers to the nature of the theoretical 
-model, in the sense that the generative approach assumes that any sample of data in generated from some distribution, and it tries to estimate this distribution. Once 
-the distribution is estimated the model could be used to actually generate instances following this distribution.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The word "generative" in generative models does not mean that the model generates actual new data additionally
+to the dataset. It refers to the nature of the theoretical model, in the sense that the generative approach
+assumes that any sample of data in generated from some distribution, and it tries to estimate this 
+distribution. Once the distribution is estimated the model could be used to actually generate instances following
+this distribution.
 </code></pre></div></div>
 
 <p>Both these models are used in supervised learning where one wants to learn a rule that maps input $X$ to output $Y$. Some argues that the discriminative models are better as they directly models the quantity we care about i.e. $Y$ and hence no efforts are spent on modelling the input $X$. However, generative models has its own advantages such as capability of dealing with missing data. Since, generative models concerns about $P(X,Y)$ and $P(X)$ at the same time in order to predict $P(Y|X)$, they have less <strong>degree of freedom</strong> as compared to discriminative models. So generative models are more robust, less prone to overfitting than discriminative models.</p>
@@ -174,12 +177,22 @@ the distribution is estimated the model could be used to actually generate insta
 
 <p>In contrast, the generative model tries to produce convincing 1’s and 0’s by generating digits that fall close to their real counterparts in the data space. It has to model the distribution throughout the data space. GANs offer an effective way to train such rich models to resemble a real distribution.</p>
 
+<h2 id="generative-adversarial-networks">
+<a class="anchor" href="#generative-adversarial-networks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Generative Adversarial Networks</h2>
+
+<p>The main idea behind GANs is to have two competing neural network models. One takes noise as input and generates samples (hence called <strong>generator</strong>) wheras other model (called <strong>discriminator</strong>) receives samples from both the <em>generator</em> and the training data, and has to be able to distinguish between the two inputs. These two networks play a continuous game, where the <em>generator</em> is leaning to produce more and more realistic samples, and the <em>discriminator</em> is learning to get better and better at distinguishing generated data from the real data.</p>
+
+<p>Lets take an example. Lets say we are going to generate hand-written numerals like those found in the MNIST dataset, which is taken from the real world. The goal of the <em>discriminator</em> here, when shown an instance from the true MNIST dataset, is to recognize those that are authentic and belong to MNIST dataset.</p>
+
+<p>Meanwhile, the <em>generator</em> is creating new, synthetic images just like MNIST dataset and passes it to the <em>discriminator</em>. <em>Generator</em> does so in the hope that its generated synthetic images will be deemed authentic by the <em>discriminator</em> even though they are fake. The goal of the <em>generator</em> is to generate hand-written digits not to be caught by <em>discriminator</em> for being fake. The goal of the <em>discriminator</em> is to identify images coming from the generators as fake.</p>
+
 <p><strong>Refereces</strong></p>
 <ol>
   <li><a href="!https://wiki.pathmind.com/generative-adversarial-network-gan">A Beginner’s Guide to Generatvive Adversarial Networks (GANs)</a></li>
   <li><a href="!https://stats.stackexchange.com/questions/4689/generative-vs-discriminative-models-in-bayesian-context">Stackoverflow</a></li>
   <li><a href="!https://developers.google.com/machine-learning/gan">Generative Adversarial Networks - Google Developers</a></li>
 </ol>
+
 
   </div><a class="u-url" href="/kernel/2021/06/30/GAN.html" hidden></a>
 </article>

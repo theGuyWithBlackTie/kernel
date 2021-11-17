@@ -114,18 +114,29 @@ window.onload = wrap_img;
 <a class="anchor" href="#background-generative-models-vs-discriminative-models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background: Generative Models v/s Discriminative Models</h2>
 <p>Discriminatie models classifies the input data; i.e. given the features of an instance of data, they predict the label or cateogry to which the data belongs. For example, given , all the words in an email (this is data instance), a discriminative model would predict whether the email is <code class="language-plaintext highlighter-rouge">spam</code> or <code class="language-plaintext highlighter-rouge">not_spam</code>. <code class="language-plaintext highlighter-rouge">spam</code> is one of the labels, and the bag of words gathered from the email are the features that constitute the input data. When this problem is expressed mathematically, the label is called as <code class="language-plaintext highlighter-rouge">y</code> and the features are called as <code class="language-plaintext highlighter-rouge">x</code>. The formualtion <code class="language-plaintext highlighter-rouge">p(y|x)</code> is used to mean “<em>the probability of y given x</em>” which in this case would translate to “the probability that an email is spam given the words it contains”.</p>
 
-<p>So discriminative models maps features to labels. They are concerned solely with that correlation. <em>One way think about generative algorithms is that they do the opposite.</em> Instead of predicting labels gien the features, generative models attempt to predict features given a certain label.</p>
+<p>So discriminative models maps features to labels. They are concerned solely with that correlation. <em>One way think about generative algorithms <span class="highlight">in terms of GANs</span> is that they do the opposite.</em> Instead of predicting labels gien the features, generative models attempt to predict features given a certain label.</p>
 
-<p>The question a generative model tries to answer is: Assuming the given email is <code class="language-plaintext highlighter-rouge">spam</code>, how likely are these features? While discriminative models care about the relation between <code class="language-plaintext highlighter-rouge">y</code> and <code class="language-plaintext highlighter-rouge">x</code>, generative models care about “<span class="highlight">how you get <code class="language-plaintext highlighter-rouge">x</code></span>. Generative models allows to capture <code class="language-plaintext highlighter-rouge">p(x|y)</code> which means probability of <code class="language-plaintext highlighter-rouge">x</code> given <code class="language-plaintext highlighter-rouge">y</code>.</p>
+<p>A generative model explicitly models the joint proability distribution <code class="language-plaintext highlighter-rouge">P(x,y)</code> and then uses Bayes rule to compute <code class="language-plaintext highlighter-rouge">p(y|x)</code> just like ilar to discriminative models. Discriminative models differs from generative models in the sense that discrimiative models directly models <code class="language-plaintext highlighter-rouge">p(y|x)</code>.</p>
+
+<p>With the help of Bayes rule, generative models allows to capture <code class="language-plaintext highlighter-rouge">p(x|y)</code> which means probability of <code class="language-plaintext highlighter-rouge">x</code> given <code class="language-plaintext highlighter-rouge">y</code>. With this, the question a generative model tries to answer is: Assuming the given email is <code class="language-plaintext highlighter-rouge">spam</code>, how likely are these features? While discriminative models care about the relation between <code class="language-plaintext highlighter-rouge">y</code> and <code class="language-plaintext highlighter-rouge">x</code>, generative models care about “<span class="highlight">how you get <code class="language-plaintext highlighter-rouge">x</code>?</span></p>
+
 <div class="Toast">
    <span class="Toast-icon"><svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
    <span class="Toast-content">Generative models can also be used as classifiers</span>
 </div>
 
+<p>Formal Definitions:</p>
+
+<ul>
+  <li>A <strong>discriminative</strong> model learns a function that maps the input data <code class="language-plaintext highlighter-rouge">x</code> to some desired output class label <code class="language-plaintext highlighter-rouge">y</code>. In probabilistic terms, they directly learn the conditional distribution <code class="language-plaintext highlighter-rouge">P(y|x)</code>.</li>
+  <li>A <strong>generative</strong> model tries to learn joint probability of the input data and labels simultaneously, i.e. <code class="language-plaintext highlighter-rouge">P(x,y)</code>. This is converted to <code class="language-plaintext highlighter-rouge">P(x|y)</code> for classification via Bayes rule, but the generative ability could be used for something else as well, such as creating new <code class="language-plaintext highlighter-rouge">(x,y)</code> sample.</li>
+</ul>
+
 <p><strong>Refereces</strong></p>
 <ol>
   <li><a href="!https://wiki.pathmind.com/generative-adversarial-network-gan">A Beginner’s Guide to Generatvive Adversarial Networks (GANs)</a></li>
 </ol>
+
 
   </div><a class="u-url" href="/kernel/2021/06/30/GAN.html" hidden></a>
 </article>

@@ -148,14 +148,13 @@ P(Y) = \int_{x}P(Y, X = x)</annotation></semantics></math></span><span class="ka
 
 <ul>
   <li>A <strong>discriminative</strong> model learns a function that maps the input data <code class="language-plaintext highlighter-rouge">X</code> to some desired output class label <code class="language-plaintext highlighter-rouge">Y</code>. In probabilistic terms, they directly learn the conditional distribution <code class="language-plaintext highlighter-rouge">P(Y|X)</code>.</li>
-  <li>
-    <p>A <strong>generative</strong> model tries to learn joint probability of the input data and labels simultaneously, i.e. <code class="language-plaintext highlighter-rouge">P(X,Y)</code>. This is converted to <code class="language-plaintext highlighter-rouge">P(X|Y)</code> for classification via Bayes rule, but the generative ability could be used for something else as well, such as creating new <code class="language-plaintext highlighter-rouge">(X,Y)</code> sample.</p>
-
-    <p><code class="language-plaintext highlighter-rouge">The word "generative" in generative models does not mean that the model generates actual new data additionally to the dataset. It refers to the nature of the theoretical 
-  model, in the sense that the generative approach assumes that any sample of data in generated from some distribution, and it tries to estimate this distribution. Once 
-  the distribution is estimated the model could be used to actually generate instances following this distribution.</code></p>
-  </li>
+  <li>A <strong>generative</strong> model tries to learn joint probability of the input data and labels simultaneously, i.e. <code class="language-plaintext highlighter-rouge">P(X,Y)</code>. This is converted to <code class="language-plaintext highlighter-rouge">P(X|Y)</code> for classification via Bayes rule, but the generative ability could be used for something else as well, such as creating new <code class="language-plaintext highlighter-rouge">(X,Y)</code> sample.</li>
 </ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The word "generative" in generative models does not mean that the model generates actual new data additionally to the dataset. It refers to the nature of the theoretical 
+model, in the sense that the generative approach assumes that any sample of data in generated from some distribution, and it tries to estimate this distribution. Once 
+the distribution is estimated the model could be used to actually generate instances following this distribution.
+</code></pre></div></div>
 
 <p>Both these models are used in supervised learning where one wants to learn a rule that maps input $X$ to output $Y$. Some argues that the discriminative models are better as they directly models the quantity we care about i.e. $Y$ and hence no efforts are spent on modelling the input $X$. However, generative models has its own advantages such as capability of dealing with missing data. Since, generative models concerns about $P(X,Y)$ and $P(X)$ at the same time in order to predict $P(Y|X)$, they have less <strong>degree of freedom</strong> as compared to discriminative models. So generative models are more robust, less prone to overfitting than discriminative models.</p>
 
@@ -181,7 +180,6 @@ P(Y) = \int_{x}P(Y, X = x)</annotation></semantics></math></span><span class="ka
   <li><a href="!https://stats.stackexchange.com/questions/4689/generative-vs-discriminative-models-in-bayesian-context">Stackoverflow</a></li>
   <li><a href="!https://developers.google.com/machine-learning/gan">Generative Adversarial Networks - Google Developers</a></li>
 </ol>
-
 
   </div><a class="u-url" href="/kernel/2021/06/30/GAN.html" hidden></a>
 </article>

@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      7 min read
+      9 min read
     
 </span></p>
 
@@ -110,7 +110,11 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#generative-models-are-hard">Generative Models are hard</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#generative-adversarial-networks">Generative Adversarial Networks</a></li>
+<li class="toc-entry toc-h2"><a href="#generative-adversarial-networks">Generative Adversarial Networks</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#discriminator">Discriminator</a></li>
+</ul>
+</li>
 </ul><p>We have come across various articles and posts about AI being capable of producing human like speech or generating images of non-existing people that are difficult to distinguish from real-life existence. These AI systems are built upon generative adversarial networks (GANs) - which Facebook AI research director Yann LeCun called “<em>most interesting idea in last 10 years in ML</em>” GANs were introduced in a <a href="!https://arxiv.org/abs/1406.2661">paper</a> by Ian Goodfellow and other researchers at the University of Montreal, including Yoshua Bengio, in 2014.</p>
 
 <p>GANs’ potential for both good and evil is huge, because they can learn to mimic any distribution of data. That is, GANs can be taught to create worlds eerily similar to our own in any domain: images, music, speech, prose. They are robot artists in a sense, and their output is impressive - poignant even. But they can also be used to generate fake media content and are the technology underpinning Deepfakes.</p>
@@ -184,7 +188,7 @@ this distribution.
 
 <p>The main idea behind GANs is to have two competing neural network models. One takes noise as input and generates samples (hence called <strong>generator</strong>) wheras other model (called <strong>discriminator</strong>) receives samples from both the <em>generator</em> and the training data, and has to be able to distinguish between the two inputs. These two networks play a continuous game, where the <em>generator</em> is leaning to produce more and more realistic samples, and the <em>discriminator</em> is learning to get better and better at distinguishing generated data from the real data.</p>
 
-<p><img src="/kernel/images/GAN_.png" alt="" title="Fig: 2. GANs Overview"></p>
+<p><img src="/kernel/images/GAN_2.png" alt="" title="Fig: 2. GANs Overview"></p>
 
 <p>Lets take an example. Lets say we are going to generate hand-written numerals like those found in the MNIST dataset, which is taken from the real world. The goal of the <em>discriminator</em> here, when shown an instance from the true MNIST dataset, is to recognize those that are authentic and belong to MNIST dataset.</p>
 
@@ -202,7 +206,7 @@ this distribution.
 
 <div class="Toast">
    <span class="Toast-icon"><svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
-   <span class="Toast-content">Discriminator takes real images and fake images one after another and calculate their probabilites for being fake or real</span>
+   <span class="Toast-content">Discriminator takes real images and fake images one after another (not simulataneously) and calculate their probabilites for being fake or real</span>
 </div>
 
 <p>So there is a double feedback loop (or two ways through which weights are updated):</p>
@@ -211,6 +215,29 @@ this distribution.
   <li>The <strong>discriminator</strong> is in a feedback loop with the ground truth of the real images i.e. discriminator’s weights are updated based on its performance to detect real images as real</li>
   <li>The <strong>generator</strong> is in a feedback loop with the <strong>discriminator</strong> i.e. generator’s weights are updated based on discriminator’s performance to detect generated images as fake</li>
 </ul>
+
+<p>The analogy that is often used to understand GAN is that the <strong>generator</strong> is like a forger trying to produce some counterfeit material, and the <strong>discriminator</strong> is like the police trying to detect the forged items. <em>This setup may also seem somewhat reminiscent of reinforcement learning, where the generator is receiving a reward signal from the discriminator letting it know whether the generated data is accurate or not.</em> The key difference with GANs however is that we can backpropagate gradients from the discriminator  network back to the generator network, so the generator knows how to adapt its parameters in order to produce output data that can fool discriminator. Lets learn how loss is propagated from one <strong>discriminator</strong> network to another <strong>generator</strong> network.</p>
+
+<h3 id="discriminator">
+<a class="anchor" href="#discriminator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Discriminator</h3>
+<p>The <strong>discriminator</strong> in GANs are simply a classifier. It tries to distinguish real data from the data generated by the <strong>generator</strong>. It could use any network architecture appropriate to the type of data it’s classifying. In MNIST example above, the <strong>discriminator</strong> network could be a standard convolutional network that can categorize the images fed to it; a binary classifier labelling images as real or fake.</p>
+
+<p>As explained earlier, <strong>discriminator’s</strong> training data comes from two sources:</p>
+
+<ul>
+  <li>Real data instances taken from the real world. The <strong>discriminator</strong> uses these instances as positive examples during training.</li>
+  <li>Fake data instances created by the <strong>generator</strong>. The <strong>discriminator</strong> uses these instances as negative examples during training.</li>
+</ul>
+
+<p>The <strong>discriminator</strong> connects to two loss functions. During discriminator training, the <strong>discriminator</strong> ignores the generator loss and just uses the discriminator loss. During <strong>discriminator</strong> training:</p>
+
+<ol>
+  <li>The <strong>discriminator</strong> classifies both real data and fake data (from the <strong>generator</strong>).</li>
+  <li>The discriminator loss penalizes the discriminator for misclassifying a real instance as fake or a fake instance as real.</li>
+  <li>The discriminator updates it weights through backpropagation from the discriminator loss through <strong>discriminator</strong> network.</li>
+</ol>
+
+<p><img src="/kernel/images/GAN_discriminator_loss.png" alt="" title="Fig: 4. Backpropagation in Discriminator Training"></p>
 
 <p><strong>Refereces</strong></p>
 <ol>

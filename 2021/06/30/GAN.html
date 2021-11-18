@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      9 min read
+      11 min read
     
 </span></p>
 
@@ -113,6 +113,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#generative-adversarial-networks">Generative Adversarial Networks</a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#discriminator">Discriminator</a></li>
+<li class="toc-entry toc-h3"><a href="#generator">Generator</a></li>
 </ul>
 </li>
 </ul><p>We have come across various articles and posts about AI being capable of producing human like speech or generating images of non-existing people that are difficult to distinguish from real-life existence. These AI systems are built upon generative adversarial networks (GANs) - which Facebook AI research director Yann LeCun called “<em>most interesting idea in last 10 years in ML</em>” GANs were introduced in a <a href="!https://arxiv.org/abs/1406.2661">paper</a> by Ian Goodfellow and other researchers at the University of Montreal, including Yoshua Bengio, in 2014.</p>
@@ -238,6 +239,29 @@ this distribution.
 </ol>
 
 <p><img src="/kernel/images/GAN_discriminator_loss.png" alt="" title="Fig: 4. Backpropagation in Discriminator Training"></p>
+
+<h3 id="generator">
+<a class="anchor" href="#generator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Generator</h3>
+
+<p>The <strong>generator</strong> part of GAN learns to create fake data by incorporating feedback from the <strong>discriminator</strong>. It learns to make the discriminator classify its output as real.</p>
+
+<p>GAN takes random noise as its input. The <strong>generator</strong> then transforms this noise into a meaningful output. By introducing noise, we can get the GAN to produce a wide variety of data, sampling from different places in the target distribution. Experiments suggest that the distribution of noise doesn’t matter much, so we can choose something that’s easy to sample from, like a normal distribution. For convenience, the space from which the noise is sampled is usually of smaller dimension than the dimensionality of the output space.</p>
+
+<p>A Neural net is trained by altering its weights to reduce the error. In GANs, however, the <strong>generator</strong> is not directly connected to the loss that we’re trying to affect. The <strong>generator</strong> feeds into the <strong>discriminator</strong> net, and the <strong>discriminator</strong> produces the output through which loss is computed. Backpropagation adjusts weights in right direction by calculating the weight’s impact on the output. But the impact of a <strong>generators</strong> weight depends on the impact of the <strong>discriminator</strong> weight it feeds into. impact  So this extra chunk of <strong>discriminator</strong> network is included in the backpropagation that trains the <strong>generator</strong>. Backpropagation starts at the output of GAN and flows back through the discriminator into the generator.</p>
+
+<p>At the same time, we don’t want the <strong>discriminator</strong> weights to be altering during the <strong>generator</strong> training.</p>
+
+<p>So <strong>generator</strong> is trained in following way:</p>
+<ol>
+  <li>Sample random noise</li>
+  <li>Produce generator output from sampled random noise</li>
+  <li>Get discriminator “Real” or “Fake” classification for generator output</li>
+  <li>Calculate loss from <strong>discriminator</strong> classification</li>
+  <li>Backpropagate through both the <strong>discriminator</strong> and <strong>generator</strong> to obtain gradients.</li>
+  <li>Use gradients to change only the generator weights.</li>
+</ol>
+
+<p><img src="/kernel/images/GAN_generator_loss.png" alt="" title="Fig: 5. Backpropagation in Generator Training"></p>
 
 <p><strong>Refereces</strong></p>
 <ol>

@@ -180,7 +180,11 @@ this distribution.
 <h2 id="generative-adversarial-networks">
 <a class="anchor" href="#generative-adversarial-networks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Generative Adversarial Networks</h2>
 
+<p>Lets dive into GANs and their working.</p>
+
 <p>The main idea behind GANs is to have two competing neural network models. One takes noise as input and generates samples (hence called <strong>generator</strong>) wheras other model (called <strong>discriminator</strong>) receives samples from both the <em>generator</em> and the training data, and has to be able to distinguish between the two inputs. These two networks play a continuous game, where the <em>generator</em> is leaning to produce more and more realistic samples, and the <em>discriminator</em> is learning to get better and better at distinguishing generated data from the real data.</p>
+
+<p><img src="/kernel/images/GAN_2.png" alt="" title="Fig: 2. GANs Overview"></p>
 
 <p>Lets take an example. Lets say we are going to generate hand-written numerals like those found in the MNIST dataset, which is taken from the real world. The goal of the <em>discriminator</em> here, when shown an instance from the true MNIST dataset, is to recognize those that are authentic and belong to MNIST dataset.</p>
 

@@ -184,13 +184,33 @@ this distribution.
 
 <p>The main idea behind GANs is to have two competing neural network models. One takes noise as input and generates samples (hence called <strong>generator</strong>) wheras other model (called <strong>discriminator</strong>) receives samples from both the <em>generator</em> and the training data, and has to be able to distinguish between the two inputs. These two networks play a continuous game, where the <em>generator</em> is leaning to produce more and more realistic samples, and the <em>discriminator</em> is learning to get better and better at distinguishing generated data from the real data.</p>
 
-<p><img src="/kernel/images/GAN_2.png" alt="" title="Fig: 2. GANs Overview"></p>
+<p><img src="/kernel/images/GAN_.png" alt="" title="Fig: 2. GANs Overview"></p>
 
 <p>Lets take an example. Lets say we are going to generate hand-written numerals like those found in the MNIST dataset, which is taken from the real world. The goal of the <em>discriminator</em> here, when shown an instance from the true MNIST dataset, is to recognize those that are authentic and belong to MNIST dataset.</p>
 
 <p>Meanwhile, the <em>generator</em> is creating new, synthetic images just like MNIST dataset and passes it to the <em>discriminator</em>. <em>Generator</em> does so in the hope that its generated synthetic images will be deemed authentic by the <em>discriminator</em> even though they are fake. The goal of the <em>generator</em> is to generate hand-written digits not to be caught by <em>discriminator</em> for being fake. The goal of the <em>discriminator</em> is to identify images coming from the generators as fake.</p>
 
-<p><img src="/kernel/images/GAN_2.png" alt="" title="Fig: 3. GANs Working for Images"></p>
+<p><img src="/kernel/images/GAN_3.png" alt="" title="Fig: 3. GANs Working for Images"></p>
+
+<p>Here are the steps a GAN takes:</p>
+
+<ul>
+  <li>The generator takes in random numbers and returns an image</li>
+  <li>This generated image is fed into the discriminator alongside a stream of images taken from the actual, ground-truth dataset.</li>
+  <li>The discriminator takes in both real and fake images and return probabilities for whether image is fake or real.</li>
+</ul>
+
+<div class="Toast">
+   <span class="Toast-icon"><svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
+   <span class="Toast-content">Discriminator takes real images and fake images one after another and calculate their probabilites for being fake or real</span>
+</div>
+
+<p>So there is a double feedback loop (or two ways through which weights are updated):</p>
+
+<ul>
+  <li>The <strong>discriminator</strong> is in a feedback loop with the ground truth of the real images i.e. discriminator’s weights are updated based on its performance to detect real images as real</li>
+  <li>The <strong>generator</strong> is in a feedback loop with the <strong>discriminator</strong> i.e. generator’s weights are updated based on discriminator’s performance to detect generated images as fake</li>
+</ul>
 
 <p><strong>Refereces</strong></p>
 <ol>
@@ -198,7 +218,6 @@ this distribution.
   <li><a href="!https://stats.stackexchange.com/questions/4689/generative-vs-discriminative-models-in-bayesian-context">Stackoverflow</a></li>
   <li><a href="!https://developers.google.com/machine-learning/gan">Generative Adversarial Networks - Google Developers</a></li>
 </ol>
-
 
   </div><a class="u-url" href="/kernel/2021/06/30/GAN.html" hidden></a>
 </article>

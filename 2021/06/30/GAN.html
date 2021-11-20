@@ -279,7 +279,7 @@ this distribution.
 
 <div class="Toast">
    <span class="Toast-icon"><svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg></span>
-   <span class="Toast-content">As the generator improves with training, the discriminator performance gets worse.</span>
+   <span class="Toast-content">As the generator improves with training, the discriminator performance gets worse which hampers generator's training</span>
 </div>
 
 <p>As the generator improves with training, the discriminator performance gets worse since the discriminator can’t easily tell the difference between real and fake. If the generator succeeds perfectly, then the discriminator has a 50% accuracy. This progression poses a problem for GAN as a whole: the <strong>discriminator</strong> feedback to <strong>generator</strong> gets less meaningful overtime. If the GAN continues training past the point when the discriminator is giving completely random feedback, then the <strong>generator</strong> starts to train on  junk feedback, and its quality may collapse.</p>
@@ -289,6 +289,7 @@ this distribution.
   <li><a href="!https://wiki.pathmind.com/generative-adversarial-network-gan">A Beginner’s Guide to Generatvive Adversarial Networks (GANs)</a></li>
   <li><a href="!https://stats.stackexchange.com/questions/4689/generative-vs-discriminative-models-in-bayesian-context">Stackoverflow</a></li>
   <li><a href="!https://developers.google.com/machine-learning/gan">Generative Adversarial Networks - Google Developers</a></li>
+  <li><a href="!https://jaketae.github.io/study/gan-math/">GAN Mathematics</a></li>
 </ol>
 
 <p><strong>More to Read</strong></p>

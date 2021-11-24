@@ -10,13 +10,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="The introduction blog to start in GAN world" />
 <meta property="og:description" content="The introduction blog to start in GAN world" />
-<link rel="canonical" href="https://theguywithblacktie.github.io/kernel/2021/06/30/GAN.html" />
-<meta property="og:url" content="https://theguywithblacktie.github.io/kernel/2021/06/30/GAN.html" />
+<link rel="canonical" href="https://theguywithblacktie.github.io/kernel/deep%20learning/2021/06/30/GAN.html" />
+<meta property="og:url" content="https://theguywithblacktie.github.io/kernel/deep%20learning/2021/06/30/GAN.html" />
 <meta property="og:site_name" content="Multiplying Matrices for a living" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-06-30T00:00:00-05:00" />
 <script type="application/ld+json">
-{"datePublished":"2021-06-30T00:00:00-05:00","url":"https://theguywithblacktie.github.io/kernel/2021/06/30/GAN.html","@type":"BlogPosting","headline":"Generative Adversarial Networks","dateModified":"2021-06-30T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://theguywithblacktie.github.io/kernel/2021/06/30/GAN.html"},"description":"The introduction blog to start in GAN world","@context":"https://schema.org"}</script>
+{"datePublished":"2021-06-30T00:00:00-05:00","url":"https://theguywithblacktie.github.io/kernel/deep%20learning/2021/06/30/GAN.html","@type":"BlogPosting","headline":"Generative Adversarial Networks","dateModified":"2021-06-30T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://theguywithblacktie.github.io/kernel/deep%20learning/2021/06/30/GAN.html"},"description":"The introduction blog to start in GAN world","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/kernel/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://theguywithblacktie.github.io/kernel/feed.xml" title="Multiplying Matrices for a living" /><link rel="shortcut icon" type="image/x-icon" href="/kernel/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -98,6 +98,13 @@ window.onload = wrap_img;
 </span></p>
 
     
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/kernel/categories/#Deep Learning">Deep Learning</a>
+        
+      
+      </p>
+    
 
     </header>
 
@@ -139,7 +146,6 @@ window.onload = wrap_img;
 </li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#problems-in-gans">Problems in GANs</a></li>
 </ul><p>We have come across various articles and posts about AI being capable of producing human like speech or generating images of non-existing people that are difficult to distinguish from real-life existence. These AI systems are built upon generative adversarial networks (GANs) - which Facebook AI research director Yann LeCun called “<em>most interesting idea in last 10 years in ML</em>” GANs were introduced in a <a href="!https://arxiv.org/abs/1406.2661">paper</a> by Ian Goodfellow and other researchers at the University of Montreal, including Yoshua Bengio, in 2014.</p>
 
 <p>GANs’ potential for both good and evil is huge, because they can learn to mimic any distribution of data. That is, GANs can be taught to create worlds eerily similar to our own in any domain: images, music, speech, prose. They are robot artists in a sense, and their output is impressive - poignant even. But they can also be used to generate fake media content and are the technology underpinning Deepfakes.</p>
@@ -454,15 +460,18 @@ V(G,D^{*}) = -log4 + \mathbb{E}_{x \sim p_{data}}[logp_{data}(x) - log\frac{p_{d
 
 <p>The best $G^{<em>}$ that replicates the real data distribution leads to the minimum $V(G,D^{</em>})$ = -log4$ which is aligned with equations above.</p>
 
-<h2 id="problems-in-gans">
-<a class="anchor" href="#problems-in-gans" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problems in GANs</h2>
-<p>The <em>min-max</em> fomrulation is a concise one-liner that intuitively demonstrates the adversarial nature of the competition between the generator and the discriminator. However, in practise, separate loss functions are defined for <strong>generator</strong> and <strong>discriminator</strong>. The minimax version is simple and allows for easier theoretical results, but in practice its not that useful, due to <strong><em>gradient saturation</em></strong>. As Ian Goodfellow himself notes:</p>
+<p>This concludes this blog post. Further to read are the problems in GANs training viz. how hard it is to obtain Nash equilibrium, gradient saturation and mode collapse; all these problems are due to the loss function of GAN. Next topic would be, how these problems are circumvented and what is WGAN. Later, one can read all the variants of GANs available or their applications in different domains.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In the minimax game, the discriminator minimizes a cross-entropy, but the generator maximizes the same cross-entropy. This is unfortunate for the generator, because when the discriminator successfully rejects generator samples with high confidence, the generator's gradient vanishes.
-</code></pre></div></div>
+<!--
+## Problems in GANs
+The *min-max* fomrulation is a concise one-liner that intuitively demonstrates the adversarial nature of the competition between the generator and the discriminator. However, in practise, separate loss functions are defined for **generator** and **discriminator**. The minimax version is simple and allows for easier theoretical results, but in practice its not that useful, due to ***gradient saturation***. As Ian Goodfellow himself notes:
 
-<p>\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space\space</p>
-
+```
+In the minimax game, the discriminator minimizes a cross-entropy, but the generator maximizes the same
+cross-entropy. This is unfortunate for the generator, because when the discriminator successfully 
+rejects generator samples with high confidence, the generator's gradient vanishes.
+```
+-->
 <p><strong>Refereces</strong></p>
 <ol>
   <li><a href="!https://wiki.pathmind.com/generative-adversarial-network-gan">A Beginner’s Guide to Generatvive Adversarial Networks (GANs)</a></li>
@@ -474,11 +483,14 @@ V(G,D^{*}) = -log4 + \mathbb{E}_{x \sim p_{data}}[logp_{data}(x) - log\frac{p_{d
 <p><strong>More to Read</strong></p>
 <ol>
   <li><a href="!https://stats.stackexchange.com/questions/12421/generative-vs-discriminative">Stackverflow: Generative v/s Discriminative</a></li>
+  <li><a href="!https://lilianweng.github.io/lil-log/2017/08/20/from-GAN-to-WGAN.html">From GAN to WGAN</a></li>
 </ol>
 
-<p>This is because the gradient of the function $y=log(x)$ is steeper near $x=0$ than that of the function $y=log(1-x)$, meaning when trying to maximize $log(D(G(z)))$, or equivalently minimizing $-log(D(G(z)))$ is going to lead to quicker, more substantial improvements to the performance of the generator that trying to minimize $log(1-D(G(z)))$.</p>
+<!--
+This is because the gradient of the function $y=log(x)$ is steeper near $x=0$ than that of the function $y=log(1-x)$, meaning when trying to maximize $log(D(G(z)))$, or equivalently minimizing $-log(D(G(z)))$ is going to lead to quicker, more substantial improvements to the performance of the generator that trying to minimize $log(1-D(G(z)))$.
+-->
 
-  </div><a class="u-url" href="/kernel/2021/06/30/GAN.html" hidden></a>
+  </div><a class="u-url" href="/kernel/deep%20learning/2021/06/30/GAN.html" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">

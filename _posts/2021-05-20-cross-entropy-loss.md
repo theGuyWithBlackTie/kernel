@@ -4,6 +4,7 @@ layout: post
 description: Explaining Cross-Entropy loss and Focal Loss
 categories: [Machine Learning, PyTorch]
 title: Understanding Cross-Entropy Loss and Focal Loss
+image: images/focal_loss and CE loss.png
 ---
 
 In this blogpost we will understand cross-entropy loss and its various different names. Later in the post, we will learn about Focal Loss, a successor of Cross-Entropy(CE) loss that performs better than CE in highly imbalanced dataset setting. We will also implement Focal Loss in PyTorch.

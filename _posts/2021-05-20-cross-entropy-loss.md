@@ -6,6 +6,7 @@ categories: [Machine Learning, PyTorch]
 title: Understanding Cross-Entropy Loss and Focal Loss
 image: images/focal_loss and CE loss.png
 ---
+<span style="color:Violet">[Updated on 03-12-2021: Fixed the Focal Loss Code]</span>
 
 In this blogpost we will understand cross-entropy loss and its various different names. Later in the post, we will learn about Focal Loss, a successor of Cross-Entropy(CE) loss that performs better than CE in highly imbalanced dataset setting. We will also implement Focal Loss in PyTorch.
 
@@ -136,15 +137,34 @@ class WeightedFocalLoss(nn.Module):
     def __init__(self, batch_size, alpha=0.25, gamma=2):
         super(WeightedFocalLoss, self).__init__()
 
+        if alpha is not None:
+            alpha = torch.tensor([alpha, 1-alpha]).cuda()
+        else:
+            print('Alpha is not given. Exiting..')
+            exit()
+        
+        # repeating the 'alpha' object declared above 'batch_size' times.
         self.alpha = alpha.repeat(batch_size, 1)
         self.gamma = gamma
 
     def forward(self, inputs, targets):
+        # computed BCE loss. This loss function take logits as the inputs i.e. no sigmoid is applied
         BCE_loss = F.binary_cross_entropy_with_logits(inputs, targets, reduction='none')
+
+        # converting type of targets to torch.long
         targets  = targets.type(torch.long)
-        at       = self.alpha
+
+        # 'gather' api takes input 1 as dimension and targets.data as the index (which are 1 and 0 as targets contains 1 and 0 only).
+        # 'gather' creates tensor of size 'targets' (i.e. batch_size x ros_size).
+        # each element's value is self.alpha[targets.data] i.e. based on 1 or 0 in targets, alpha's corresponfing index value is taken.
+        at       = self.alpha.gather(1, targets.data)
+
+        # Creating the probabilities for each class from the BCE loss.
         pt       = torch.exp(-BCE_loss)
+
+        # Focal Loss formula
         F_loss   = at*(1-pt)**self.gamma * BCE_loss
+
         return F_loss.mean()
 ```
 

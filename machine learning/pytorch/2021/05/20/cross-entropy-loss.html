@@ -137,7 +137,9 @@ window.onload = wrap_img;
 </li>
 </ul>
 </li>
-</ul><p>In this blogpost we will understand cross-entropy loss and its various different names. Later in the post, we will learn about Focal Loss, a successor of Cross-Entropy(CE) loss that performs better than CE in highly imbalanced dataset setting. We will also implement Focal Loss in PyTorch.</p>
+</ul><p><span style="color:Violet">[Updated on 03-12-2021: Fixed the Focal Loss Code]</span></p>
+
+<p>In this blogpost we will understand cross-entropy loss and its various different names. Later in the post, we will learn about Focal Loss, a successor of Cross-Entropy(CE) loss that performs better than CE in highly imbalanced dataset setting. We will also implement Focal Loss in PyTorch.</p>
 
 <p>Cross-Entropy loss has its different names due to its different variations used in different settings but its core concept (or understanding) remains same across all the different settings. Cross-Entropy Loss is used in a supervised setting and before diving deep into CE, first let’s revise widely known and important concepts:</p>
 
@@ -290,15 +292,34 @@ In the graph, “blue” line represents <strong>Cross-Entropy Loss</strong>. Th
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">WeightedFocalLoss</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">alpha</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">alpha</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">]).</span><span class="n">cuda</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'Alpha is not given. Exiting..'</span><span class="p">)</span>
+            <span class="nb">exit</span><span class="p">()</span>
+        
+        <span class="c1"># repeating the 'alpha' object declared above 'batch_size' times.
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="p">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
-        <span class="n">BCE_loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s">'none'</span><span class="p">)</span>
-        <span class="n">targets</span>  <span class="o">=</span> <span class="n">targets</span><span class="p">.</span><span class="nb">type</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="nb">long</span><span class="p">)</span>
-        <span class="n">at</span>       <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">alpha</span>
-        <span class="n">pt</span>       <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">BCE_loss</span><span class="p">)</span>
-        <span class="n">F_loss</span>   <span class="o">=</span> <span class="n">at</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pt</span><span class="p">)</span><span class="o">**</span><span class="bp">self</span><span class="p">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">BCE_loss</span>
+        <span class="c1"># computed BCE loss. This loss function take logits as the inputs i.e. no sigmoid is applied
+</span>        <span class="n">BCE_loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s">'none'</span><span class="p">)</span>
+
+        <span class="c1"># converting type of targets to torch.long
+</span>        <span class="n">targets</span>  <span class="o">=</span> <span class="n">targets</span><span class="p">.</span><span class="nb">type</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="nb">long</span><span class="p">)</span>
+
+        <span class="c1"># 'gather' api takes input 1 as dimension and targets.data as the index (which are 1 and 0 as targets contains 1 and 0 only).
+</span>        <span class="c1"># 'gather' creates tensor of size 'targets' (i.e. batch_size x ros_size).
+</span>        <span class="c1"># each element's value is self.alpha[targets.data] i.e. based on 1 or 0 in targets, alpha's corresponfing index value is taken.
+</span>        <span class="n">at</span>       <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">alpha</span><span class="p">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">targets</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># Creating the probabilities for each class from the BCE loss.
+</span>        <span class="n">pt</span>       <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">BCE_loss</span><span class="p">)</span>
+
+        <span class="c1"># Focal Loss formula
+</span>        <span class="n">F_loss</span>   <span class="o">=</span> <span class="n">at</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pt</span><span class="p">)</span><span class="o">**</span><span class="bp">self</span><span class="p">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">BCE_loss</span>
+
         <span class="k">return</span> <span class="n">F_loss</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span>
 </code></pre></div></div>
 

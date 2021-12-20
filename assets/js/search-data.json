@@ -3,7 +3,7 @@
     
         "post0": {
             "title": "What is BLEU score?",
-            "content": "BLEU, or Bilingual Evaluation Understudy, is a performance metric score for comparing the machine translations and human created reference translations for the same source sentence. This metric was introduced in Kishore Papineni, et al. in their 2002 paper “BLEU: a Method for Automatic Evaluation of Machine Translation” .",
+            "content": "BLEU, or Bilingual Evaluation Understudy, is a performance metric score for comparing the machine translations and human created reference translations for the same source sentence. This metric was introduced in Kishore Papineni, et al. in their 2002 paper “BLEU: a Method for Automatic Evaluation of Machine Translation” . The goal of any machine translation system is to produce translation results equal to those of a professional human translator. BLEU algorithm is designed to measure eactly that. .",
             "url": "https://theguywithblacktie.github.io/kernel/deep%20learning/2021/07/20/BLEU.html",
             "relUrl": "/deep%20learning/2021/07/20/BLEU.html",
             "date": " • Jul 20, 2021"

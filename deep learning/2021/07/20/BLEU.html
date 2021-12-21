@@ -118,10 +118,17 @@ window.onload = wrap_img;
 
 <p>Let’s take an example:</p>
 
-<p><code class="language-plaintext highlighter-rouge">**Candidate Sentence:** there is cat on mat 
-**Reference Sentence:** the cat is on the mat
-</code>
-Total nos. of unigrams in candidate sentence is $5$. Whereas, only 3 unigrams matches with the unigrams in the reference sentence. Hence precision would be: $3/5 = 0.6$</p>
+<p><strong>Candidate Sentence:</strong> there is cat on mat 
+<strong>Reference Sentence:</strong> the cat is on the mat</p>
+
+<p>Total nos. of unigrams in candidate sentence is $5$. Whereas, only 3 unigrams matches with the unigrams in the reference sentence. Hence precision would be: $3/5 = 0.6$</p>
+
+<p>On a closer look, we can see precision is not a very good metric to evaluate the machine translations. Machines (or Neural Networks) can over predict “reasonable” words, resulting in improbable, but high-precision translations just like below example:</p>
+
+<p><strong>Candidate Sentence:</strong> the the the the the the
+<strong>Reference Sentence:</strong> the cat is on the mat</p>
+
+<p>Similar to previous example, we can calculate the precision for candidate sentence which would be $5/5$ but the translation is terrible.</p>
 
   </div><a class="u-url" href="/kernel/deep%20learning/2021/07/20/BLEU.html" hidden></a>
 </article>

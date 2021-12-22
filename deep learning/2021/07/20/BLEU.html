@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      2 min read
     
 </span></p>
 
@@ -119,25 +119,6 @@ window.onload = wrap_img;
 
 <p>Let’s take an example:</p>
 
-<p><strong>Candidate Sentence:</strong> there is cat on mat 
-<strong>Reference Sentence:</strong> the cat is on the mat
-—
-toc: true
-layout: post
-description: A blog explaining everything about BLEU score in Neural Machine Translation
-title: What is BLEU score?
-categories: [Deep Learning]
-hide: true
-—</p>
-
-<p>BLEU, or Bilingual Evaluation Understudy, is a performance metric score for comparing the machine translations and human created reference translations for the same source sentence. This metric was introduced in Kishore Papineni, et al. in their 2002 paper “<a href="!https://aclanthology.org/P02-1040.pdf">BLEU: a Method for Automatic Evaluation of Machine Translation</a>”</p>
-
-<p>The goal of any machine translation system is to produce translation results equal to those of a professional human translator. BLEU algorithm is designed to measure eactly that.</p>
-
-<p>A very easy metric to score machine translation result is to compute its <em>precision</em>. To compute precision, one simply counts the number of candidate translation words (i.e. unigrams) which occur in any reference translation and then divides by the total number of words in the candidate translation.</p>
-
-<p>Let’s take an example:</p>
-
 <p><strong>Candidate Sentence:</strong> there is cat on mat <br>
 <strong>Reference Sentence:</strong> the cat is on the mat</p>
 
@@ -156,24 +137,16 @@ hide: true
 
 <p>Let’s understand <em>modified <strong>unigram</strong> precision</em> first to get better idea. To compute this, one firsts counts the maximum number of times a word occurs in any single reference transation. Next, one clips the total count of each candidate word by its maximum reference count, add these clipped counts up, and divides by the total (unclipped) number of candidate words.</p>
 
-<p><strong>Candidate Sentence:</strong> the the the the the the the
-<strong>Reference Sentence 1:</strong> the cat is on the mat
-<strong>Reference Sentence 2:</strong> There is a cat on the mat</p>
+<p><strong>Candidate Sentence:</strong> the the the the the the the<br>
+<strong>Reference Sentence 1:</strong> the cat is on the mat<br>
+<strong>Reference Sentence 2:</strong> There is a cat on the mat<br></p>
 
 <p>With respect to reference sentence 1 the frequency of words are:
-<em>the:</em> 2
-<em>cat:</em> 1
-<em>is:</em> 1
-<em>on:</em> 1
-<em>mat:</em> 1
-Total nos. of unigrams in candidate sentence is $5$. Whereas, only 3 unigrams matches with the unigrams in the reference sentence. Hence precision would be: $3/5 = 0.6$</p>
-
-<p>On a closer look, we can see precision is not a very good metric to evaluate the machine translations. Machines (or Neural Networks) can over predict “reasonable” words, resulting in improbable, but high-precision translations just like below example:</p>
-
-<p><strong>Candidate Sentence:</strong> the the the the the the
-<strong>Reference Sentence:</strong> the cat is on the mat</p>
-
-<p>Similar to previous example, we can calculate the precision for candidate sentence which would be $5/5$ but the translation is terrible.</p>
+<em>the:</em> 2<br>
+<em>cat:</em> 1<br>
+<em>is:</em> 1<br>
+<em>on:</em> 1<br>
+<em>mat:</em> 1<br></p>
 
   </div><a class="u-url" href="/kernel/deep%20learning/2021/07/20/BLEU.html" hidden></a>
 </article>

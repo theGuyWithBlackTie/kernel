@@ -135,18 +135,29 @@ window.onload = wrap_img;
 <a class="anchor" href="#modified-n-gram-precision" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modified n-gram precision</h2>
 <p>The core of the BLEU metric score is precision. But we saw a regular precision metric is not a right metric to evaluate the translation quality and could give better scores to a very horrendous translation. Due to this, <em>modified n-gram</em> precision is introduced in BLEU and it makes the core of the BLEU metric.</p>
 
-<p>Let’s understand <em>modified <strong>unigram</strong> precision</em> first to get better idea. To compute this, one firsts counts the maximum number of times a word occurs in any single reference transation. Next, one clips the total count of each candidate word by its maximum reference count, add these clipped counts up, and divides by the total (unclipped) number of candidate words.</p>
+<p>Let’s understand <em>modified <strong>unigram</strong> precision</em> first to get better idea. To compute this, one firsts counts the maximum number of times a word occurs in any single reference translation. Next, one clips the total count of each candidate word by its maximum reference count, add these clipped counts up, and divides by the total (unclipped) number of candidate words.</p>
 
 <p><strong>Candidate Sentence:</strong> the the the the the the the<br>
 <strong>Reference Sentence 1:</strong> the cat is on the mat<br>
 <strong>Reference Sentence 2:</strong> There is a cat on the mat<br></p>
 
-<p>With respect to reference sentence 1 the frequency of words are:
+<p>With respect to reference sentence 1 the frequency of words are:<br>
 <em>the:</em> 2<br>
 <em>cat:</em> 1<br>
 <em>is:</em> 1<br>
 <em>on:</em> 1<br>
 <em>mat:</em> 1<br></p>
+
+<p>Similarly, frequency of words with respect to reference sentence 2 are:<br>
+<em>there</em>: 1<br>
+<em>is</em>: 1<br>
+<em>a</em>: 1<br>
+<em>cat</em>: 1<br>
+<em>on</em>: 1<br>
+<em>the</em>: 1<br>
+<em>mat</em>:<br></p>
+
+<p>While calculating <strong>modified n-grams precision</strong>, we will consider the maximum frequency a word has in all the reference sentences. In the above example, all words have frequency $1$, so $1$ will be the <strong>max</strong> frequency of these words. Only, <em>the</em> word has max frequency of $2$ in 1st reference sentence and 1 in 2nd reference sentence. We will consider its max frequency as $2$.</p>
 
   </div><a class="u-url" href="/kernel/deep%20learning/2021/07/20/BLEU.html" hidden></a>
 </article>
